@@ -1,0 +1,116 @@
+# 📂 File & Directory Management
+
+Purpose: Commands to manage files, directories, permissions, and storage.
+
+---
+
+## 📘 Commands:
+
+```bash
+ls -l /home                    # List files
+mkdir myfolder                 # Create directory
+rmdir oldfolder                # Remove empty dir
+rm file.txt                    # Delete file
+rm -rf folder/                 # Delete folder
+cp file1.txt backup/           # Copy file
+cp -r folder1/ folder2/        # Copy folder
+mv file.txt archive/           # Move file
+find /home -name "*.txt"       # Find files
+locate bashrc                  # Locate file
+sudo updatedb                  # Update locate DB
+touch report.txt               # New file
+diff file1 file2               # Compare files
+cmp file1.bin file2.bin        # Binary compare
+xxd file.txt                   # Hex dump
+basename /etc/passwd           # Filename only
+dirname /etc/passwd            # Directory path
+readlink -f /usr/bin/python    # Show symlink target
+realpath ./script.sh           # Absolute path
+lsattr file.txt                # List file attributes
+chattr +i file.txt             # Make file immutable
+rename 's/.txt/.bak/' *.txt    # Batch rename
+split -b 1M bigfile part_      # Split file
+cat file1 file2 > combined.txt # Merge files
+more file.txt                  # Page view file
+less file.txt                  # Scroll file view
+head -n 5 notes.txt            # First lines
+tail -n 10 access.log          # Last lines
+cut -d':' -f1 /etc/passwd      # Cut fields
+tr a-z A-Z < file.txt          # Convert to uppercase
+sort file.txt                  # Sort lines
+sort file.txt | uniq           # Remove duplicates
+wc -l file.txt                 # Count lines
+echo "Hello" | tee msg.txt     # Output & save
+nl file.txt                    # Number lines
+strings binary_file            # Extract text
+ls -i                          # Show inodes
+du -sh *                       # Folder sizes
+df -h                          # Disk free
+mount /dev/sdb1 /mnt           # Mount device
+umount /mnt                    # Unmount
+sudo fsck /dev/sda1            # Check disk
+sync                           # Flush writes
+watch -n 2 ls -lh              # Repeat command
+file example.sh                # Identify type
+namei /usr/local/bin/bash      # Path components 
+
+
+
+# 📁 File Navigation & Operations Commands
+
+Purpose: Navigate directories, create, copy, move, rename, delete, view, and manipulate files and folders.
+
+---
+
+## 📘 Commands:
+
+```bash
+pwd                                  # Show current directory
+ls                                   # List files in directory
+ls -l                                # Long listing format
+ls -a                                # Include hidden files
+ls -lh                               # Human-readable sizes
+cd /path/to/directory                # Change directory
+cd ..                                # Go up one level
+cd ~                                 # Go to home directory
+mkdir myfolder                       # Create directory
+mkdir -p /tmp/dir1/dir2              # Create nested directories
+rmdir myfolder                       # Remove empty directory
+rm file.txt                          # Remove file
+rm -f file.txt                       # Force remove
+rm -r dir/                           # Remove directory recursively
+rm -rf dir/                          # Force recursive remove
+cp file1.txt file2.txt               # Copy file
+cp -r dir1/ dir2/                    # Copy directory recursively
+mv file1.txt file2.txt               # Rename/move file
+mv file.txt /path/to/dir/            # Move file to another directory
+touch file.txt                       # Create empty file
+cat file.txt                         # Show file contents
+tac file.txt                         # Show file contents in reverse
+more file.txt                        # View file page by page
+less file.txt                        # Better file viewer
+head -n 10 file.txt                  # First 10 lines
+tail -n 10 file.txt                  # Last 10 lines
+tail -f /var/log/syslog              # Live log monitoring
+echo "Hello World" > hello.txt       # Write to file (overwrite)
+echo "Another line" >> hello.txt     # Append to file
+file filename                        # Detect file type
+stat file.txt                        # Detailed file info
+wc -l file.txt                       # Count lines in file
+wc -w file.txt                       # Count words in file
+wc -c file.txt                       # Count bytes in file
+find / -name "file.txt"              # Find file by name
+find /home -type f -size +10M        # Find files > 10MB
+basename /path/file.txt              # Strip path, show filename
+dirname /path/file.txt               # Strip filename, show path
+realpath file.txt                    # Absolute path of file
+history                              # Show command history
+alias ll='ls -lh'                    # Create shortcut command
+unalias ll                           # Remove alias
+tree                                  # Visual directory tree (if installed)
+diff file1 file2                     # Compare two files
+cmp file1 file2                      # Byte-by-byte compare
+strings binaryfile                   # Extract text from binary
+xxd file                             # Hex dump of file
+grep "search_term" file.txt          # Search text in file
+grep -r "search_term" /path/to/dir   # Recursive search in directory 

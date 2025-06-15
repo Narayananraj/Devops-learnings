@@ -1,0 +1,89 @@
+# 👥 User Management Commands
+
+Purpose: Manage users, groups, permissions, passwords, and related account settings.
+
+---
+
+## 📘 Commands:
+
+```bash
+whoami                               # Show current user
+id                                    # Show UID, GID, groups
+groups                                # Groups of current user
+users                                 # Show logged in users
+who                                   # Who is logged in
+w                                     # Show user activity
+last                                  # Login history
+sudo adduser username                 # Add new user
+sudo userdel username                 # Delete user
+sudo usermod -aG sudo username        # Add user to sudo group
+sudo usermod -aG groupname username   # Add to specific group
+sudo passwd username                  # Set/change user password
+passwd                                # Change current user’s password
+passwd -l username                    # Lock user account
+passwd -u username                    # Unlock user account
+sudo groupadd groupname               # Create new group
+sudo groupdel groupname               # Delete group
+sudo gpasswd -a username groupname    # Add user to group
+sudo gpasswd -d username groupname    # Remove user from group
+getent passwd                         # List all users
+getent group                          # List all groups
+chage -l username                     # Show password aging info
+sudo chage -M 90 username             # Set max password age
+sudo chage -E 2025-12-31 username     # Set account expiry date
+newgrp groupname                      # Switch to new group in session
+su - username                         # Switch to another user shell
+finger username                       # User details (if installed)
+sudo visudo                           # Edit sudoers safely
+sudo usermod -s /bin/bash username    # Change user’s shell
+sudo usermod -d /home/newdir username # Change user’s home directory
+sudo mkdir /home/username             # Create home directory manually
+sudo chown username:username /home/username # Set ownership
+sudo chmod 700 /home/username         # Set permissions on home directory
+sudo usermod -c "Full Name" username  # Set user comment    
+
+
+
+
+# 🔐 File Permissions & Ownership Commands
+
+Purpose: Manage file and directory permissions, ownership, ACLs, and access security.
+
+---
+
+## 📘 Commands:
+
+```bash
+ls -l                              # List permissions
+chmod 755 file.sh                  # Set rwxr-xr-x permissions
+chmod u+x script.sh                # Add execute for user
+chmod g-w file.txt                 # Remove write for group
+chmod o+r file.txt                 # Add read for others
+chmod 644 file.txt                 # rw-r--r--
+chmod 700 secret.sh                # Owner full, none others
+chown user file.txt                # Change owner
+chown user:group file.txt          # Change owner and group
+chown -R user:group /data          # Recursive ownership
+chgrp groupname file.txt           # Change group ownership
+umask                              # Show default permissions mask
+umask 022                          # Set default mask
+getfacl file.txt                   # Show ACLs
+setfacl -m u:john:rw file.txt      # Add ACL for user
+setfacl -x u:john file.txt         # Remove ACL for user
+setfacl -m g:devops:r-- file.txt   # ACL for group
+setfacl -m u:alice:rwx dir         # Full access to Alice
+getenforce                         # Show SELinux mode
+setenforce 0                       # Set SELinux to permissive
+sudo visudo                         # Edit sudoers safely
+sudo usermod -aG sudo username     # Add user to sudo group
+sudoers                            # Check sudo privileges config
+find . -perm 777                   # Find files with 777 permissions
+find . -type f -perm 644           # Find files with 644
+find / -user username              # Files owned by user
+find / -group groupname            # Files owned by group
+stat file.txt                      # Detailed file info
+namei -l /path/to/file             # Permissions along path
+id                                 # Show current UID, GID, groups
+groups                             # Show user’s groups
+sudo chmod 440 /etc/sudoers        # Secure sudoers file
+sudo chown root:root /etc/sudoers  # Set sudoers ownership

@@ -1,0 +1,44 @@
+# 💾 Disk Management Commands
+
+Purpose: View, manage, partition, format, and monitor disk storage and file systems.
+
+---
+
+## 📘 Commands:
+
+```bash
+df -h                                # Disk usage (human-readable)
+df -i                                # Inodes usage
+du -sh /var/log                      # Directory size
+du -ah /home | sort -rh | head -10   # Top 10 largest files/dirs
+lsblk                                 # List block devices
+blkid                                 # Show device UUID and type
+fdisk -l                              # List disk partitions
+fdisk /dev/sdb                        # Partition a disk (MBR)
+parted /dev/sdb                       # Partition with GPT
+mkfs.ext4 /dev/sdb1                   # Format partition to ext4
+mkfs.xfs /dev/sdb1                    # Format to XFS
+mkfs.vfat /dev/sdb1                   # Format to FAT32
+mount /dev/sdb1 /mnt                  # Mount a partition
+umount /mnt                           # Unmount a partition
+mount -o loop file.iso /mnt           # Mount ISO file
+ls -lh /dev/disk/by-uuid/             # View disk UUIDs
+tune2fs -l /dev/sda1                  # Filesystem details
+swapoff -a                            # Disable swap
+swapon -a                             # Enable swap
+swapon -s                             # Show swap usage
+mkswap /swapfile                      # Create swap space
+dd if=/dev/zero of=/swapfile bs=1G count=2 # Allocate 2GB swapfile
+chmod 600 /swapfile                   # Secure swapfile
+mkswap /swapfile                      # Set swap area
+swapon /swapfile                      # Enable swap
+echo "/swapfile none swap sw 0 0" >> /etc/fstab # Persist swap
+findmnt                               # Display mounted filesystems
+mount | column -t                     # List mounts neatly
+iostat                                # CPU & disk I/O stats
+iotop                                 # Real-time I/O usage
+df -Th                                # Disk type and usage
+du --max-depth=1 -h /                 # Folder sizes at root
+xfs_info /dev/sda1                    # Info on XFS filesystem
+resize2fs /dev/sda1                   # Resize ext2/3/4 filesystem
+partprobe                              # Inform kernel of partition changes

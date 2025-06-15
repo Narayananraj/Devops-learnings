@@ -1,0 +1,40 @@
+# ⚙️ Process Management Commands
+
+Purpose: Manage system processes — start, stop, monitor, and troubleshoot running processes.
+
+---
+
+## 📘 Commands:
+
+```bash
+ps                                # Show current processes
+ps aux                            # All processes with details
+ps -ef                            # Another full format
+top                               # Real-time process monitor
+htop                              # Advanced top (if installed)
+pidof nginx                       # Find PID of a process
+kill 1234                         # Kill process by PID
+kill -9 1234                      # Force kill process
+killall nginx                     # Kill by name
+nohup command &                   # Run in background, immune to hangups
+jobs                              # List background jobs
+bg %1                             # Resume background job
+fg %1                             # Bring job to foreground
+sleep 60                          # Sleep for 60 seconds
+watch -n 2 free -m                # Run command every 2 seconds
+strace -p 1234                    # Trace system calls
+lsof -p 1234                      # List open files by process
+lsof -i :80                       # Processes using port 80
+nice -n 10 ./script.sh            # Run with lower priority
+renice 5 1234                     # Change priority of running process
+uptime                            # Show system load
+time ./script.sh                  # Time a command execution
+pgrep nginx                       # List PIDs by process name
+pkill nginx                       # Kill processes by name
+daemon --name="myjob" /path/job   # Run as daemon (if installed)
+systemctl status nginx            # Check service status
+systemctl restart nginx           # Restart service
+service apache2 restart           # Restart service (SysV)
+systemctl stop nginx              # Stop service
+systemctl enable nginx            # Enable on boot
+systemctl disable nginx           # Disable on boot

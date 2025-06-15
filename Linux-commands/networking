@@ -1,0 +1,51 @@
+# 🌐 Networking Commands
+
+Purpose: Manage, test, and troubleshoot network connections, interfaces, ports, and traffic.
+
+---
+
+## 📘 Commands:
+
+```bash
+ip a                              # Show IP addresses
+ifconfig                          # Network interfaces (legacy)
+ip link show                      # Interface details
+ip route                          # Routing table
+ping 8.8.8.8                      # Test connectivity
+traceroute google.com             # Trace route to host
+mtr google.com                    # Continuous trace
+netstat -tulnp                    # Active ports & services
+ss -tulnp                         # Replacement for netstat
+curl https://example.com          # Fetch web content
+wget https://example.com/file.zip # Download file
+dig google.com                    # DNS query
+nslookup google.com               # DNS lookup (legacy)
+host google.com                   # DNS lookup
+arp -a                            # ARP table
+ip neigh                          # Neighbor discovery
+route -n                          # Show routes
+nmcli device status               # List interfaces (NetworkManager)
+ethtool eth0                      # Ethernet settings
+tcpdump -i eth0                   # Packet capture
+tcpdump -nn -i eth0 port 80       # Capture port 80 traffic
+nmap -sP 192.168.1.0/24           # Ping scan
+nmap -p 22,80,443 192.168.1.10    # Port scan
+whois google.com                  # Domain info
+iperf3 -s                         # Start bandwidth test server
+iperf3 -c 192.168.1.100           # Run bandwidth test
+hostname -I                       # Local IP address
+ping6 google.com                  # Ping IPv6
+curl -I https://example.com       # HTTP headers only
+curl -o file.html https://example.com # Download to file
+wget --limit-rate=100k URL        # Limit download speed
+nload                             # Real-time bandwidth usage
+bmon                              # Bandwidth monitor
+iftop                             # Real-time bandwidth by host
+ip -s link                        # Show stats
+iptables -L                       # Firewall rules
+firewall-cmd --state              # FirewallD status
+ufw status                        # UFW firewall status
+nc -zv 192.168.1.100 22           # Test open port
+ssh user@host                     # SSH connect
+scp file.txt user@host:/path      # Copy file over SSH
+rsync -av file user@host:/dest    # Sync file over SSH

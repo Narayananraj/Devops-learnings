@@ -1,0 +1,59 @@
+# 📗 Basic Linux Commands
+
+Purpose: Basic navigation, user, and system information commands for everyday use.
+
+---
+
+## 📘 Commands:
+
+```bash
+pwd                         # Show current directory
+ls -la                      # List files with details
+cd /var/log                 # Change directory
+echo "Hello, Linux!"        # Display text
+clear                       # Clear terminal
+whoami                      # Show current username
+date                        # Display current date/time
+cal                         # Show calendar
+history                     # Show command history
+man ls                      # Open manual page for 'ls'
+uname -a                    # Show system info
+hostname                    # Display system hostname
+uptime                      # How long system is running
+who                         # List logged-in users
+id                          # Show UID, GID
+exit                        # Logout terminal
+logout                      # End terminal session
+su - username               # Switch to another user
+sudo apt update             # Update package lists
+passwd                      # Change user password
+alias ll="ls -la"           # Create command alias
+unalias ll                  # Remove alias
+env                         # Show environment variables
+export EDITOR=vim           # Set environment variable
+printenv PATH               # Show PATH variable
+set                         # Show shell variables
+read name                   # Prompt for input
+sleep 5                     # Pause for 5 seconds
+time ls -R /                # Time a command execution
+touch file.txt              # Create empty file
+cat file.txt                # Show file contents
+head -n 10 file.txt         # Show first 10 lines
+tail -f /var/log/syslog     # Follow live log
+wc -l file.txt              # Count lines
+stat file.txt               # Show file details
+file script.sh              # Identify file type
+basename /home/user/test.txt # Extract filename
+dirname /home/user/test.txt # Extract directory path
+yes "Running"               # Repeat string until stopped
+which python                # Show command path
+type ls                     # Show command type
+command ls                  # Execute command
+eval "echo Hello"           # Evaluate command string
+exec bash                   # Replace shell process
+printf "Name: %s\n" "Linux" # Formatted output
+echo "log" | tee logfile.txt # Output to file and screen
+basename /etc/hosts         # Filename only
+help cd                     # Help on builtin command
+jobs                        # List background jobs
+bg %1                       # Resume job in background

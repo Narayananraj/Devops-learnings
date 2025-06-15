@@ -1,0 +1,71 @@
+# 📦 Package Management Commands
+
+Purpose: Install, update, remove, and manage software packages using various Linux package managers.
+
+---
+
+## 📘 Commands:
+
+### 📌 APT (Debian/Ubuntu)
+
+```bash
+sudo apt update                         # Update package index
+sudo apt upgrade                        # Upgrade installed packages
+sudo apt install nginx                  # Install package
+sudo apt remove nginx                   # Remove package
+sudo apt purge nginx                    # Remove package with config
+sudo apt autoremove                     # Remove unused dependencies
+sudo apt install ./package.deb          # Install local .deb file
+sudo dpkg -i package.deb                # Install with dpkg
+sudo dpkg -r package-name               # Remove package
+sudo apt-cache search nginx             # Search package
+apt list --installed                    # List installed packages
+apt show nginx                          # Package details
+
+📌 YUM/DNF (RHEL/CentOS/Fedora)
+bash
+Copy
+Edit
+sudo yum check-update                   # Check for updates
+sudo yum install httpd                  # Install package
+sudo yum remove httpd                   # Remove package
+sudo yum update                         # Update system
+yum list installed                      # List installed
+yum info httpd                          # Package info
+sudo yum install epel-release           # Install repo
+sudo yum groupinstall "Development Tools" # Install package group
+bash
+Copy
+Edit
+sudo dnf install nginx                  # (on newer Fedora/CentOS)
+sudo dnf remove nginx
+sudo dnf update
+dnf list installed  
+
+📌 Zypper (openSUSE)
+bash
+Copy
+Edit
+sudo zypper refresh                     # Refresh repo cache
+sudo zypper install nginx               # Install package
+sudo zypper remove nginx                # Remove package
+sudo zypper update                      # Update system
+zypper search nginx                     # Search package 
+
+📌 Snap (Universal)
+bash
+Copy
+Edit
+sudo snap install vlc                   # Install snap package
+sudo snap remove vlc                    # Remove snap
+snap list                               # List installed snaps
+sudo snap refresh                       # Update all snaps 
+
+📌 Flatpak (Universal)
+bash
+Copy
+Edit
+flatpak install flathub org.gimp.GIMP   # Install package
+flatpak uninstall org.gimp.GIMP         # Remove package
+flatpak update                          # Update installed apps
+flatpak list                            # List apps

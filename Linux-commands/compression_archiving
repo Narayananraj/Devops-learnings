@@ -1,0 +1,35 @@
+# 📦 Compression & Archiving Commands
+
+Purpose: Compress, extract, and manage archive files like `.tar`, `.zip`, `.gz`, and more.
+
+---
+
+## 📘 Commands:
+
+```bash
+tar -cvf archive.tar file1 file2 dir     # Create tar archive
+tar -xvf archive.tar                     # Extract tar archive
+tar -tvf archive.tar                     # List contents of tar
+tar -czvf archive.tar.gz dir             # Create compressed tar.gz
+tar -xzvf archive.tar.gz                 # Extract tar.gz
+tar -cjvf archive.tar.bz2 dir            # Create tar.bz2
+tar -xjvf archive.tar.bz2                # Extract tar.bz2
+zip files.zip file1 file2                # Create zip archive
+unzip files.zip                          # Extract zip
+zip -r archive.zip folder/               # Zip folder recursively
+gzip file.txt                            # Compress file (creates file.txt.gz)
+gzip -d file.txt.gz                      # Decompress gzip
+gunzip file.txt.gz                       # Decompress gzip (alt)
+bzip2 file.txt                           # Compress with bzip2
+bunzip2 file.txt.bz2                     # Decompress bzip2
+xz file.txt                              # Compress with xz
+unxz file.txt.xz                         # Decompress xz
+7z a archive.7z file1 dir                # Create 7z archive
+7z x archive.7z                          # Extract 7z archive
+rar a archive.rar file1 file2            # Create rar archive
+unrar x archive.rar                      # Extract rar archive
+tar --exclude='*.log' -czvf backup.tar.gz /data # Exclude files while archiving
+tar --strip-components=1 -xvf archive.tar # Extract without top folder
+tar -cf - dir | gzip > backup.tar.gz     # Archive and compress via pipe
+tar -xzf - < backup.tar.gz               # Extract from pipe
+find /var/log -name "*.log" | tar -czf logs.tar.gz -T - # Tar files from find

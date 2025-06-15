@@ -1,0 +1,132 @@
+# 🖥️ System Info & Monitoring
+
+Purpose: Check system specs, resource usage, user activity, and monitor processes.
+
+---
+
+## 📘 Commands:
+
+```bash
+uname -a                       # System details
+hostname                       # Show hostname
+uptime                         # Uptime
+top                            # Live processes
+htop                           # Enhanced top
+vmstat 2                       # Memory stats
+free -h                        # RAM usage
+lscpu                          # CPU info
+lsblk                          # Block devices
+lsusb                          # USB devices
+lspci                          # PCI devices
+df -h                          # Disk usage
+du -sh *                       # Folder sizes
+iostat                         # I/O stats
+mpstat -P ALL                  # CPU per core
+pidstat 1                      # Process stats
+dstat                          # Real-time stats
+who                            # Users logged in
+w                              # Who doing what
+users                          # List usernames
+id username                    # UID and GID
+last                           # Login history
+uptime -p                      # Pretty uptime
+uptime -s                      # Boot time
+lsmod                          # Kernel modules
+modinfo snd_hda_intel          # Module info
+sudo dmidecode                 # Hardware info
+lsof -i                        # Open sockets
+cat /proc/cpuinfo              # CPU info
+cat /proc/meminfo              # Memory info
+cat /proc/version              # Kernel version
+cat /etc/os-release            # OS release
+neofetch                       # ASCII system info
+screenfetch                    # System info
+watch -n 1 free -m             # Live RAM
+watch -n 1 df -h               # Live disk
+ls -lh /                       # List root
+systemctl status ssh           # Service status
+journalctl -xe                 # System logs
+ps -aux                        # Process list
+pstree                         # Process tree
+hostnamectl                    # Hostname control
+ls -al /sys/class/thermal      # Temp sensors
+cat /sys/class/thermal/thermal_zone0/temp # CPU temp
+top -n 1 -b                    # Top one snapshot 
+
+
+# 📊 System Monitoring & Performance Commands
+
+Purpose: Monitor system resources, performance metrics, hardware, uptime, and load.
+
+---
+
+## 📘 Commands:
+
+```bash
+uptime                              # System uptime and load average
+top                                  # Live system processes & resource usage
+htop                                 # Enhanced top (if installed)
+free -h                              # Memory usage (human-readable)
+vmstat 2 5                           # Memory, CPU, IO stats every 2s (5 times)
+iostat                               # CPU and disk I/O stats (from sysstat)
+iotop                                # Real-time disk I/O per process
+mpstat 2 5                           # CPU usage per core (every 2s)
+sar -u 2 5                           # CPU usage report (requires sysstat)
+df -h                                # Disk space usage
+du -sh /home                         # Directory disk usage summary
+lsblk                                 # List block devices
+blkid                                 # Show block device UUID and type
+ifconfig                              # Show network interfaces (legacy)
+ip addr                               # Show network interfaces (modern)
+ip link show                          # Show network interfaces state
+ip route show                         # Show routing table
+ping google.com                       # Test network connectivity
+traceroute google.com                 # Trace network route (install if needed)
+mtr google.com                        # Real-time traceroute (if installed)
+netstat -tulnp                        # Show open ports and processes
+ss -tulnp                             # Modern replacement for netstat
+lsof -i :80                           # List processes on port 80
+watch -n 1 'df -h'                    # Monitor disk usage every second
+dstat                                 # System resource stats (if installed)
+glances                               # System monitor in one screen (if installed)
+uptime                                # Show load averages
+who                                   # Who is logged in
+w                                     # Who is logged in + what they’re doing
+last                                  # Last logins
+ps aux                                # Show all processes
+pidstat 2 5                           # Process statistics by PID
+vmstat                                # Virtual memory, IO, CPU
+free -m                               # Memory in MB
+hostnamectl                           # System hostname and OS info
+uname -a                              # Full system kernel info
+arch                                  # System architecture
+lscpu                                 # CPU info
+lsmem                                 # Memory info (if available)
+lspci                                 # PCI devices
+lsusb                                 # USB devices
+dmidecode                             # Detailed hardware info (sudo)
+inxi -Fx                              # System summary (if installed)
+uptime -p                             # Human-readable uptime
+uptime -s                             # System boot time
+dmesg | less                          # Boot logs
+journalctl -xe                       # Systemd logs and errors 
+dmesg -T                             # Human-readable kernel messages
+lshw                                 # List hardware (requires sudo)
+ lshw -short                          # Short hardware summary 
+ lshw -C network                     # Network hardware info 
+ lshw -C display                     # Display hardware info 
+ lshw -C cpu                         # CPU hardware info 
+    lshw -C memory                      # Memory hardware info 
+    lshw -C disk                        # Disk hardware info 
+    lshw -C storage                     # Storage hardware info 
+    lshw -C sound                       # Sound hardware 
+    lshw -C multimedia                  # Multimedia hardware info 
+    lshw -C system                      # System hardware info 
+    lshw -C power                       # Power hardware info 
+    lshw -C input                       # Input devices info 
+    lshw -C network                    # Network hardware info 
+    lshw -C printer                     # Printer hardware info 
+    lshw -C video                       # Video hardware info 
+    lshw -C camera                      # Camera hardware info 
+    lshw -C bluetooth                   # Bluetooth hardware info 
+    lshw -C audio                       # Audio hardware info
