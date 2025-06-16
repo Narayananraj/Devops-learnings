@@ -1,0 +1,62 @@
+# 📖 Docker Basic Concepts
+
+This section covers the fundamental concepts of **Docker**, its components, and its architecture — essential for understanding how containerization works.
+
+---
+
+## 📌 What is Docker?
+
+**Docker** is an open-source platform designed to help developers build, ship, and run applications inside lightweight, portable containers.
+
+---
+
+## 📦 Why Docker?
+
+- 🚀 Faster and consistent deployments
+- 📦 Package once, run anywhere
+- ⚙️ Isolate applications from host environment
+- 📊 Efficient resource utilization
+- ☁️ Cloud-native & microservices friendly
+
+---
+
+## 📊 Docker Components
+
+| Component       | Description                                                        |
+|:----------------|:-------------------------------------------------------------------|
+| **Docker Engine** | The core service for running containers                            |
+| **Docker Images** | Read-only templates used to create containers                      |
+| **Docker Containers** | Lightweight, executable application packages                    |
+| **Docker Hub** | Public cloud-based Docker image registry                            |
+| **Docker Compose** | Tool for defining and running multi-container Docker applications |
+| **Dockerfile** | Text file containing instructions to build a Docker image           |
+
+---
+
+## 🖥️ Docker Architecture
+
+1️⃣ **Client** → 2️⃣ **Docker Daemon (Server)** → 3️⃣ **Docker Objects (Images, Containers, Volumes, Networks)**
+
+- Docker client sends commands (via CLI)
+- Docker daemon listens for requests and manages objects
+- Objects include images, containers, networks, and volumes
+
+---
+
+## 📌 Container vs. Virtual Machine
+
+| Container                          | Virtual Machine                     |
+|:-----------------------------------|:------------------------------------|
+| Shares host OS kernel              | Requires full OS for each instance  |
+| Lightweight and faster to start    | Heavier, slower boot time           |
+| Uses less resources                | Consumes more resources             |
+| Ideal for microservices and cloud  | Good for traditional monolithic apps|
+
+---
+
+## 📖 Summary
+
+Docker simplifies application delivery by **containerizing applications** and their dependencies, ensuring consistency across development, testing, and production environments.
+
+---
+
