@@ -1,0 +1,141 @@
+📦 Git Basics
+Command	Purpose
+git init	Initialize a new Git repository
+git status	Show current status of working directory and staging area
+git add <file>	Add specific file to staging area
+git add .	Add all changes in current directory to staging
+git commit -m "message"	Commit staged changes with a message
+git config --global user.name "Name"	Set global username for commits
+git config --global user.email "email@example.com"	Set global email for commits
+git --version	Check installed Git version
+git help <command>	Show help for a specific command 
+
+
+🌿 Branching
+Command	Purpose
+git branch	List branches
+git branch <name>	Create a new branch
+git checkout <name>	Switch to a branch
+git checkout -b <name>	Create and switch to a new branch
+git branch -d <name>	Delete a branch
+git merge <branch>	Merge specified branch into current branch 
+
+
+📥 Staging & Commits
+Command	Purpose
+git add <file>	Stage changes for commit
+git commit -m "message"	Commit staged changes
+git commit -am "message"	Stage and commit tracked files in one step
+git reset HEAD <file>	Unstage a file 
+
+
+🌐 Working with Remotes
+Command	Purpose
+git remote -v	Show connected remotes
+git remote add origin <url>	Add a new remote repo
+git push -u origin <branch>	Push branch to remote
+git pull	Fetch and merge changes from remote
+git clone <url>	Clone remote repo locally 
+
+
+📜 Logs & History
+Command	Purpose
+git log	Show commit history
+git log --oneline	Condensed one-line log
+git diff	Show file differences
+git show <commit>	Show details of a specific commit 
+
+
+🛑 Reverting & Resetting
+Command	Purpose
+git checkout -- <file>	Discard changes in working directory
+git revert <commit>	Create a new commit that undoes the changes
+git reset --soft <commit>	Move HEAD to commit, keep changes staged
+git reset --hard <commit>	Move HEAD to commit, discard changes 
+
+
+📦 Stash Management
+Command	Purpose
+git stash	Stash current changes
+git stash list	List stashes
+git stash apply	Apply latest stash
+git stash drop	Remove latest stash 
+
+
+🏷️ Tagging
+Command	Purpose
+git tag	List tags
+git tag <name>	Create lightweight tag
+git tag -a <name> -m "msg"	Create annotated tag
+git push origin <tag>	Push tag to remote 
+
+
+⚙️ Config & SSH Setup
+Command	Purpose
+git config --list	Show all current configs
+ssh-keygen -t rsa -b 4096 -C "email@example.com"	Generate SSH key
+eval $(ssh-agent -s)	Start SSH agent
+ssh-add ~/.ssh/id_rsa	Add SSH key to agent 
+
+
+🗃️ Git Ignore & Clean
+Command	Purpose
+echo "filename" >> .gitignore	Add file to .gitignore
+git rm -r --cached <file>	Remove file from Git tracking (keep locally)
+git clean -fd	Remove untracked files and directories
+git clean -fx	Remove untracked files, directories, and ignored files 
+
+
+🔄 Remote Management
+Command	Purpose
+git remote rename <old> <new>	Rename a remote
+git remote remove <name>	Remove a remote
+git fetch <remote>	Fetch changes from a remote
+git fetch --all	Fetch changes from all remotes
+git remote show <name>	Show detailed info about a remote 
+
+
+📦 Submodules
+Command	Purpose
+git submodule add <repo-url>	Add a submodule
+git submodule update --init --recursive	Initialize and update submodules
+git submodule status	Show submodule status
+git submodule deinit -f .	Deinitialize all submodules 
+
+
+📄 Cherry-pick & Rebase
+Command	Purpose
+git cherry-pick <commit>	Apply a specific commit to current branch
+git rebase <branch>	Reapply commits on top of another base tip
+git rebase -i HEAD~3	Interactive rebase last 3 commits
+git rebase --abort	Abort a rebase in progress 
+
+
+📦 Archive & Export
+Command	Purpose
+git archive --format zip --output file.zip HEAD	Export current repo as zip
+git archive --format tar --output file.tar HEAD	Export current repo as tarball 
+
+
+🔍 Search & Grep
+Command	Purpose
+git grep "text"	Search for a string in the repo
+git log -S"string"	Find commits adding/removing a string
+git diff --stat	Show diff summary with file size changes 
+
+
+🖥️ Aliases (Time-savers)
+Command	Purpose
+git config --global alias.st status	Create git st for git status
+git config --global alias.ci commit	Create git ci for git commit
+git config --global alias.co checkout	Create git co for git checkout
+git config --global alias.br branch	Create git br for git branch 
+
+
+⚠️ Conflict Resolution
+Command	Purpose
+git mergetool	Launch merge conflict tool
+git diff	See conflict changes
+git status	Show files with conflicts
+git add <file>	Mark conflict resolved
+git commit	Complete merge after resolving
