@@ -1,0 +1,174 @@
+# ☁️ Cloud Concepts — DevOps Reference
+
+A structured reference of core cloud computing concepts for DevOps engineers.
+
+---
+
+## Table of Contents
+
+1. [Cloud Fundamentals](#1-cloud-fundamentals)
+2. [Service Models](#2-service-models)
+3. [Deployment Models](#3-deployment-models)
+4. [Core Infrastructure](#4-core-infrastructure)
+5. [Networking](#5-networking)
+6. [Storage](#6-storage)
+7. [Compute](#7-compute)
+8. [Scalability & Availability](#8-scalability--availability)
+9. [Security & Identity](#9-security--identity)
+10. [Cost & FinOps](#10-cost--finops)
+11. [Architecture Principles](#11-architecture-principles)
+12. [Operations & Governance](#12-operations--governance)
+
+---
+
+## 1. Cloud Fundamentals
+
+- **Cloud Computing** — on-demand delivery of compute, storage, and services over the internet
+- **On-demand self-service** — provision resources without human intervention
+- **Elasticity** — scale resources up/down based on demand
+- **Pay-as-you-go** — pay only for what you use
+- **Shared responsibility model** — security split between provider and customer
+- **Multi-tenancy** — shared infrastructure, isolated tenants
+- **Resource pooling** — shared physical resources abstracted from users
+
+---
+
+## 2. Service Models
+
+| Model | Description | You Manage | Example |
+|-------|-------------|------------|---------|
+| **IaaS** | Infrastructure as a Service | OS, apps, runtime | EC2, GCE, Azure VM |
+| **PaaS** | Platform as a Service | Apps + data only | App Engine, App Service |
+| **SaaS** | Software as a Service | Nothing (just use) | Gmail, Salesforce |
+| **FaaS** | Function as a Service | Code only | Lambda, Cloud Functions |
+| **CaaS** | Containers as a Service | Containers | EKS, GKE, AKS |
+
+---
+
+## 3. Deployment Models
+
+- **Public Cloud** — shared, provider-owned (AWS, Azure, GCP)
+- **Private Cloud** — dedicated, single-org (on-prem or hosted)
+- **Hybrid Cloud** — mix of public + private
+- **Multi-Cloud** — multiple public providers
+- **Community Cloud** — shared by organizations with common concerns
+
+---
+
+## 4. Core Infrastructure
+
+- **Region** — geographic area with multiple data centers
+- **Availability Zone (AZ)** — isolated data center(s) within a region
+- **Edge Location / PoP** — CDN caching points close to users
+- **Data Center** — physical facility hosting infrastructure
+- **Resource Group / Project** — logical container for resources
+
+---
+
+## 5. Networking
+
+- **VPC / VNet** — isolated virtual network
+- **Subnet** — segment of a VPC (public/private)
+- **CIDR block** — IP address range notation
+- **Route table** — directs network traffic
+- **Internet Gateway / NAT Gateway** — internet access in/out
+- **Load Balancer** — distributes traffic (L4 / L7)
+- **DNS** — name resolution service
+- **CDN** — content delivery / caching at the edge
+- **VPN / Direct Connect** — hybrid connectivity
+- **Security Group / NACL** — virtual firewalls
+
+---
+
+## 6. Storage
+
+| Type | Description | Use Case |
+|------|-------------|----------|
+| **Object Storage** | Flat, scalable blobs | Backups, media, static sites |
+| **Block Storage** | Raw volumes attached to VMs | Databases, OS disks |
+| **File Storage** | Shared filesystem (NFS/SMB) | Shared app data |
+| **Archive Storage** | Cold, cheap, slow retrieval | Long-term retention |
+
+**Concepts:** durability (e.g. 11 nines), availability, replication, lifecycle policies, storage tiers, encryption at rest.
+
+---
+
+## 7. Compute
+
+- **Virtual Machine (VM)** — virtualized server
+- **Container** — lightweight, portable runtime unit
+- **Serverless / FaaS** — event-driven, no server management
+- **Spot / Preemptible instances** — cheap, interruptible capacity
+- **Reserved / Committed instances** — discounted long-term commitment
+- **Auto-scaling** — adjust capacity automatically
+
+---
+
+## 8. Scalability & Availability
+
+- **Vertical scaling (scale up)** — bigger machine
+- **Horizontal scaling (scale out)** — more machines
+- **Elasticity** — automatic scaling with demand
+- **High Availability (HA)** — minimal downtime via redundancy
+- **Fault tolerance** — survive component failures
+- **Disaster Recovery (DR)** — recovery after major failure
+- **RTO** — Recovery Time Objective
+- **RPO** — Recovery Point Objective
+- **Redundancy** — duplicate components to avoid SPOF
+
+---
+
+## 9. Security & Identity
+
+- **IAM** — Identity and Access Management
+- **Principle of least privilege**
+- **Roles, policies, permissions**
+- **MFA** — Multi-Factor Authentication
+- **Encryption** — at rest & in transit (TLS, KMS)
+- **Secrets management** — secure credential storage
+- **Shared responsibility model**
+- **Compliance** — GDPR, HIPAA, SOC 2, ISO 27001
+- **Zero Trust** — never trust, always verify
+
+---
+
+## 10. Cost & FinOps
+
+- **Pay-as-you-go** — usage-based billing
+- **Reserved / Committed use** — discounts for commitment
+- **Spot pricing** — cheap interruptible capacity
+- **Cost allocation tags** — track spend by team/project
+- **Right-sizing** — match resources to actual need
+- **Budgets & alerts** — spending guardrails
+- **TCO** — Total Cost of Ownership
+- **FinOps** — cloud financial operations / cost culture
+
+---
+
+## 11. Architecture Principles
+
+- **Well-Architected Framework** — operational excellence, security, reliability, performance, cost, sustainability
+- **Loose coupling** — independent components
+- **Statelessness** — no session state on servers
+- **Immutable infrastructure** — replace, don't modify
+- **Microservices** — small independent services
+- **Event-driven architecture** — react to events
+- **Idempotency** — safe to repeat operations
+- **Design for failure** — assume things break
+
+---
+
+## 12. Operations & Governance
+
+- **Infrastructure as Code (IaC)** — declarative infra (Terraform, CloudFormation)
+- **Tagging strategy** — organize and track resources
+- **Monitoring & logging** — observability into systems
+- **Auditing** — track changes and access
+- **Quotas & limits** — resource constraints
+- **Landing zone** — baseline secure account/org setup
+- **Policy as Code** — automated governance (OPA, SCPs)
+- **Drift detection** — actual vs desired state
+
+---
+
+> **Quick takeaway:** The highest-leverage cloud concepts for daily DevOps work are the **shared responsibility model**, **regions/AZs for HA**, **VPC networking**, **IAM least privilege**, **auto-scaling**, and **Infrastructure as Code** — these underpin nearly every architectural decision.

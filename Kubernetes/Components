@@ -1,0 +1,112 @@
+Here's a comprehensive list of Kubernetes components, broken down by category.
+Control Plane Components (Master)
+
+kube-apiserver
+etcd
+kube-scheduler
+kube-controller-manager
+cloud-controller-manager
+
+Node Components (Worker)
+
+kubelet
+kube-proxy
+container runtime (containerd, CRI-O, Docker)
+
+Workload Resources
+
+Pods
+ReplicaSet
+Deployment
+StatefulSet
+DaemonSet
+Job
+CronJob
+ReplicationController (legacy)
+
+Service & Networking
+
+Service (ClusterIP, NodePort, LoadBalancer, ExternalName)
+Ingress
+IngressClass
+EndpointSlice / Endpoints
+NetworkPolicy
+Gateway API (Gateway, HTTPRoute, GatewayClass)
+DNS (CoreDNS)
+
+Config & Storage
+
+ConfigMap
+Secret
+Volume
+PersistentVolume (PV)
+PersistentVolumeClaim (PVC)
+StorageClass
+CSI drivers
+VolumeSnapshot / VolumeSnapshotClass
+
+Cluster / Organization
+
+Namespace
+Node
+ResourceQuota
+LimitRange
+PriorityClass
+RuntimeClass
+
+Access Control & Security
+
+ServiceAccount
+Role
+ClusterRole
+RoleBinding
+ClusterRoleBinding
+RBAC
+PodSecurityAdmission (PSA)
+SecurityContext
+
+Autoscaling
+
+HorizontalPodAutoscaler (HPA)
+VerticalPodAutoscaler (VPA)
+Cluster Autoscaler
+
+Scheduling & Placement
+
+Taints & Tolerations
+Affinity / Anti-affinity (node, pod)
+nodeSelector
+PodDisruptionBudget (PDB)
+
+Extensibility
+
+CustomResourceDefinition (CRD)
+Custom Resources (CR)
+Operators / Controllers
+Admission Webhooks (Mutating, Validating)
+Aggregation Layer / APIService
+
+Tools & CLI
+
+kubectl
+kubeadm
+kubelet (also a tool/daemon)
+kustomize
+Helm
+Lens / k9s (third-party)
+
+Observability / Probes
+
+Liveness probe
+Readiness probe
+Startup probe
+Metrics Server
+Events
+
+Other
+
+Lease (used for leader election, node heartbeats)
+Labels & Annotations
+Selectors
+Finalizers
+OwnerReferences

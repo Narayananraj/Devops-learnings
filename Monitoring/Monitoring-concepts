@@ -1,0 +1,220 @@
+Here's a comprehensive list of monitoring and observability concepts a DevOps engineer should know, organized by category.
+Core Concepts
+
+Monitoring vs Observability (known-unknowns vs unknown-unknowns)
+The Three Pillars of Observability: Metrics, Logs, Traces
+Telemetry — data collected from systems
+Instrumentation — adding observability to code
+White-box vs black-box monitoring
+Push vs pull collection models
+Cardinality (unique label combinations)
+Signal vs noise
+
+Metrics
+Metric Types
+
+Counter (monotonically increasing)
+Gauge (value that goes up/down)
+Histogram (distribution of values, buckets)
+Summary (quantiles calculated client-side)
+
+Concepts
+
+Time-series data
+Labels / tags / dimensions
+Aggregation (sum, avg, min, max, rate)
+Rate / increase calculations
+Percentiles (p50, p90, p95, p99)
+Resolution / scrape interval
+Retention
+Downsampling
+Recording rules (pre-computed queries)
+
+The Four Golden Signals (Google SRE)
+
+Latency — time to serve a request
+Traffic — demand on the system (RPS, throughput)
+Errors — rate of failed requests
+Saturation — how "full" the system is (resource utilization)
+
+RED & USE Methods
+RED (for services/requests)
+
+Rate — requests per second
+Errors — failed requests
+Duration — request latency
+
+USE (for resources)
+
+Utilization — % time busy
+Saturation — queued work
+Errors — error count
+
+Logging
+
+Structured logging (JSON) vs unstructured
+Log levels (DEBUG, INFO, WARN, ERROR, FATAL)
+Log aggregation / centralization
+Log parsing / indexing
+Log shipping (agents, forwarders)
+Log retention / rotation
+Correlation IDs / request IDs
+Contextual logging
+Log sampling
+Audit logs
+
+Distributed Tracing
+
+Trace — end-to-end request journey
+Span — single operation within a trace
+Trace ID / Span ID
+Parent-child span relationships
+Context propagation
+Sampling (head-based, tail-based)
+Service dependency mapping
+Latency breakdown per service
+OpenTelemetry (vendor-neutral standard)
+
+Alerting
+
+Alert rules / conditions / thresholds
+Static vs dynamic thresholds
+Anomaly detection
+Alert severity levels (critical, warning, info)
+Alert routing / escalation
+On-call rotation / scheduling
+Alert fatigue (and reducing it)
+Alert grouping / deduplication
+Silencing / muting / maintenance windows
+Notification channels (PagerDuty, Slack, email, Opsgenie)
+Actionable alerts (every alert should require action)
+Symptom-based vs cause-based alerting
+
+SLI / SLO / SLA & Error Budgets
+
+SLI (Service Level Indicator) — measured metric
+SLO (Service Level Objective) — target for SLI
+SLA (Service Level Agreement) — contractual commitment
+Error budget — allowed unreliability (1 − SLO)
+Error budget burn rate
+Availability targets (99.9%, 99.99% — "nines")
+Toil reduction
+
+Visualization & Dashboards
+
+Dashboards
+Panels / widgets / graphs
+Heatmaps
+Time-series graphs
+Single-stat / gauge panels
+Templating / variables (dynamic dashboards)
+Annotations (mark events on graphs)
+Drill-down / correlation
+Golden dashboards per service
+
+Health Checks & Uptime
+
+Liveness checks (is it running?)
+Readiness checks (can it serve traffic?)
+Startup probes
+Synthetic monitoring (simulated user journeys)
+Real User Monitoring (RUM)
+Uptime / availability monitoring
+Heartbeats / dead man's switch
+Endpoint / port checks
+
+Incident Management
+
+Incident detection
+Triage / severity classification (SEV levels)
+MTTD (Mean Time To Detect)
+MTTR (Mean Time To Resolve/Recover)
+MTBF (Mean Time Between Failures)
+Acknowledgment / escalation
+Runbooks / playbooks
+Postmortems (blameless)
+Root Cause Analysis (RCA)
+Incident timeline / war room
+Status pages
+
+APM (Application Performance Monitoring)
+
+Transaction tracing
+Code-level profiling
+Database query monitoring (slow queries)
+Apdex score
+Error tracking (exceptions, stack traces)
+Dependency monitoring
+Memory / CPU profiling
+Flame graphs
+
+Infrastructure Monitoring
+
+Host metrics (CPU, memory, disk, network)
+Disk I/O / IOPS
+Network throughput / packet loss
+Container metrics (cgroups)
+Kubernetes monitoring (nodes, pods, control plane)
+Process monitoring
+Hardware / temperature / SMART
+Capacity planning
+
+Tools & Ecosystem
+Metrics
+
+Prometheus (pull-based, PromQL)
+Grafana (visualization)
+VictoriaMetrics, Thanos, Cortex (scaling Prometheus)
+InfluxDB, Graphite
+Datadog, New Relic, Dynatrace (commercial APM)
+CloudWatch, Azure Monitor, GCP Cloud Monitoring
+
+Logs
+
+ELK / Elastic Stack (Elasticsearch, Logstash, Kibana)
+Loki (Grafana)
+Fluentd / Fluent Bit (log shippers)
+Splunk
+Vector
+
+Tracing
+
+Jaeger
+Zipkin
+Tempo (Grafana)
+OpenTelemetry (instrumentation standard)
+
+Alerting / Incident
+
+Alertmanager (Prometheus)
+PagerDuty, Opsgenie, VictorOps
+BetterStack
+Statuspage
+
+Uptime / Synthetic
+
+BetterStack, Pingdom, UptimeRobot
+Blackbox Exporter (Prometheus)
+
+Query Languages
+
+PromQL (Prometheus)
+LogQL (Loki)
+TraceQL (Tempo)
+KQL (Kibana / Azure)
+SPL (Splunk)
+
+Best Practices
+
+Monitor what matters (user-facing symptoms first)
+Alert on symptoms, not causes
+Reduce alert fatigue (actionable alerts only)
+Define SLOs before alerting
+Dashboards tell a story
+Standardize instrumentation (OpenTelemetry)
+Correlate metrics, logs, and traces
+Automate remediation where safe
+Test your alerts (and your monitoring)
+High cardinality awareness (cost/performance)
+
+That spans the conceptual foundation (three pillars, golden signals, RED/USE), the SLO/error-budget framework, alerting and incident management, and the tooling landscape. The highest-leverage starting points are the four golden signals, well-defined SLOs, symptom-based actionable alerts, and correlating metrics/logs/traces — which connects directly to a Prometheus/Grafana/Loki + BetterStack-style stack.

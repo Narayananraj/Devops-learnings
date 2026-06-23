@@ -1,0 +1,167 @@
+# ☁️ DevOps Cloud Services — AWS vs Azure vs GCP
+
+A side-by-side mapping of DevOps-related cloud services across the three major providers, paired by function.
+
+---
+
+## Table of Contents
+
+1. [Compute](#1-compute)
+2. [Containers & Kubernetes](#2-containers--kubernetes)
+3. [Storage](#3-storage)
+4. [Databases](#4-databases)
+5. [Networking](#5-networking)
+6. [CI/CD & Developer Tools](#6-cicd--developer-tools)
+7. [Infrastructure as Code](#7-infrastructure-as-code)
+8. [Monitoring & Observability](#8-monitoring--observability)
+9. [Security, Identity & Secrets](#9-security-identity--secrets)
+10. [Messaging & Eventing](#10-messaging--eventing)
+11. [Data & Analytics](#11-data--analytics-devops-adjacent)
+12. [Edge & Serverless Platform](#12-edge--serverless-platform)
+
+---
+
+## 1. Compute
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Virtual machines | EC2 | Virtual Machines (VM) | Compute Engine (GCE) |
+| Auto-scaling | Auto Scaling Groups (ASG) | Virtual Machine Scale Sets (VMSS) | Managed Instance Groups (MIG) |
+| Serverless functions | Lambda | Azure Functions | Cloud Functions |
+| PaaS / app hosting | Elastic Beanstalk | App Service | App Engine |
+| Batch processing | AWS Batch | Azure Batch | Cloud Batch |
+| Bare metal | EC2 Bare Metal | Bare Metal Servers | Bare Metal Solution |
+
+---
+
+## 2. Containers & Kubernetes
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Managed Kubernetes | EKS | AKS | GKE |
+| Container orchestration (proprietary) | ECS | Container Instances (ACI) | Cloud Run (serverless containers) |
+| Serverless containers | Fargate | Container Apps | Cloud Run |
+| Container registry | ECR | Azure Container Registry (ACR) | Artifact Registry / Container Registry (GCR) |
+
+---
+
+## 3. Storage
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Object storage | S3 | Blob Storage | Cloud Storage (GCS) |
+| Block storage | EBS | Managed Disks | Persistent Disk |
+| File storage | EFS / FSx | Azure Files | Filestore |
+| Archive / cold storage | S3 Glacier | Blob Archive tier | Cloud Storage Archive |
+
+---
+
+## 4. Databases
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Managed relational | RDS | Azure SQL Database / DB for PostgreSQL/MySQL | Cloud SQL |
+| Distributed / global SQL | Aurora | Cosmos DB (multi-model) | Cloud Spanner |
+| NoSQL (key-value/document) | DynamoDB | Cosmos DB | Firestore / Bigtable |
+| In-memory cache | ElastiCache | Azure Cache for Redis | Memorystore |
+| Data warehouse | Redshift | Synapse Analytics | BigQuery |
+
+---
+
+## 5. Networking
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Virtual network | VPC | Virtual Network (VNet) | VPC |
+| Load balancer | ELB (ALB/NLB) | Load Balancer / Application Gateway | Cloud Load Balancing |
+| DNS | Route 53 | Azure DNS | Cloud DNS |
+| CDN | CloudFront | Azure CDN / Front Door | Cloud CDN |
+| Private connectivity | Direct Connect | ExpressRoute | Cloud Interconnect |
+| VPN | Site-to-Site VPN | VPN Gateway | Cloud VPN |
+| Private service access | PrivateLink | Private Link | Private Service Connect |
+| API gateway | API Gateway | API Management | API Gateway / Apigee |
+
+---
+
+## 6. CI/CD & Developer Tools
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Pipeline orchestration | CodePipeline | Azure Pipelines (Azure DevOps) | Cloud Build / Cloud Deploy |
+| Build service | CodeBuild | Azure Pipelines | Cloud Build |
+| Deployment service | CodeDeploy | Azure Pipelines / DevOps | Cloud Deploy |
+| Source repos | CodeCommit | Azure Repos | Cloud Source Repositories |
+| Artifact storage | CodeArtifact | Azure Artifacts | Artifact Registry |
+| Developer suite | CodeStar (deprecated) | Azure DevOps | Cloud Code |
+
+---
+
+## 7. Infrastructure as Code
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Native IaC | CloudFormation | ARM Templates / Bicep | Deployment Manager |
+| Cross-cloud | Terraform / Pulumi | Terraform / Pulumi | Terraform / Pulumi |
+| CDK | AWS CDK | Bicep / Azure CDK | (Terraform-based) |
+
+---
+
+## 8. Monitoring & Observability
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Metrics / monitoring | CloudWatch | Azure Monitor | Cloud Monitoring |
+| Logging | CloudWatch Logs | Log Analytics / Azure Monitor Logs | Cloud Logging |
+| Tracing | X-Ray | Application Insights | Cloud Trace |
+| APM | CloudWatch + X-Ray | Application Insights | Cloud Trace / Profiler |
+| Auditing | CloudTrail | Azure Activity Log / Monitor | Cloud Audit Logs |
+| Profiling | CodeGuru Profiler | Application Insights Profiler | Cloud Profiler |
+
+---
+
+## 9. Security, Identity & Secrets
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Identity & access | IAM | Entra ID (Azure AD) / RBAC | Cloud IAM |
+| Secrets management | Secrets Manager | Key Vault | Secret Manager |
+| Key management | KMS | Key Vault | Cloud KMS |
+| Certificate management | ACM | Key Vault Certificates | Certificate Manager |
+| WAF | AWS WAF | Azure WAF | Cloud Armor |
+| DDoS protection | Shield | DDoS Protection | Cloud Armor |
+| Security posture | Security Hub / GuardDuty | Defender for Cloud | Security Command Center |
+
+---
+
+## 10. Messaging & Eventing
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Message queue | SQS | Service Bus / Queue Storage | Cloud Tasks / Pub/Sub |
+| Pub/sub messaging | SNS | Event Grid / Service Bus | Pub/Sub |
+| Event streaming | Kinesis / MSK (Kafka) | Event Hubs | Pub/Sub / Dataflow |
+| Workflow orchestration | Step Functions | Logic Apps / Durable Functions | Workflows / Cloud Composer |
+
+---
+
+## 11. Data & Analytics (DevOps-adjacent)
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Managed Airflow | MWAA | Data Factory (orchestration) | Cloud Composer |
+| ETL | Glue | Data Factory | Dataflow / Dataproc |
+| Big data / Spark | EMR | HDInsight / Synapse | Dataproc |
+| Streaming | Kinesis | Stream Analytics | Dataflow |
+
+---
+
+## 12. Edge & Serverless Platform
+
+| Function | AWS | Azure | GCP |
+|----------|-----|-------|-----|
+| Edge compute | Lambda@Edge / CloudFront Functions | Azure Front Door + Functions | Cloud Functions + CDN |
+| IoT | IoT Core | IoT Hub | IoT Core (deprecated) |
+
+---
+
+> **Quick takeaway:** The most-used DevOps trio in daily work tends to be **compute** (EC2 / VM / GCE) + **managed Kubernetes** (EKS / AKS / GKE) + the **monitoring stack** (CloudWatch / Azure Monitor / Cloud Monitoring), wired together with **Terraform** for cross-cloud IaC.

@@ -1,0 +1,145 @@
+Here's a comprehensive list of Docker components and concepts, organized by category.
+Core Architecture
+
+Docker Engine — the core runtime
+Docker Daemon (dockerd) — background service managing objects
+Docker Client (docker CLI) — command-line interface
+REST API — interface between client and daemon
+containerd — high-level container runtime
+runc — low-level OCI runtime
+shim (containerd-shim) — keeps containers running independent of daemon
+
+Core Objects
+
+Image — read-only template for containers
+Container — runnable instance of an image
+Volume — persistent data storage
+Network — container connectivity
+Registry — image storage/distribution (Docker Hub, etc.)
+Repository — collection of related images (tags)
+Tag — image version label
+
+Images
+
+Dockerfile — build instructions
+Image layers — stacked filesystem changes
+Base image
+Parent image
+Intermediate images
+Image manifest
+Image digest (SHA256)
+Multi-stage builds
+Build context
+.dockerignore
+BuildKit — modern build backend
+Multi-arch / multi-platform images
+OCI image spec
+
+Dockerfile Instructions
+
+FROM — base image
+RUN — execute command at build time
+CMD — default runtime command
+ENTRYPOINT — fixed runtime executable
+COPY — copy files into image
+ADD — copy + extract/URL fetch
+WORKDIR — set working directory
+ENV — environment variables
+ARG — build-time variables
+EXPOSE — document ports
+VOLUME — declare mount points
+USER — set user
+LABEL — metadata
+HEALTHCHECK — container health check
+ONBUILD — trigger for downstream builds
+STOPSIGNAL, SHELL
+
+Storage / Data
+
+Volumes (named, anonymous)
+Bind mounts
+tmpfs mounts
+Volume drivers
+Storage drivers (overlay2, etc.)
+Copy-on-write (CoW)
+Container writable layer
+Data persistence
+
+Networking
+
+Network drivers: bridge, host, none, overlay, macvlan, ipvlan
+Default bridge network
+User-defined bridge
+Port mapping / publishing (-p)
+Embedded DNS
+Network namespaces
+Links (legacy)
+Exposed vs published ports
+
+Registry & Distribution
+
+Docker Hub
+Private registries
+docker pull / push
+Image tagging conventions
+Authentication (docker login)
+Registry mirrors
+Harbor, ECR, GCR, ACR (third-party registries)
+
+Multi-Container / Orchestration
+
+Docker Compose — multi-container definitions
+docker-compose.yml / compose.yaml
+Services, networks, volumes (in Compose)
+Docker Swarm — native clustering/orchestration
+Swarm services, tasks, nodes
+Stacks
+Secrets & Configs (Swarm)
+Replicas / scaling
+Load balancing / routing mesh
+
+Runtime / Isolation Concepts
+
+Namespaces (PID, NET, MNT, UTS, IPC, USER) — isolation
+cgroups — resource limits
+Capabilities — privilege control
+Seccomp profiles
+AppArmor / SELinux
+Rootless mode
+User namespaces
+
+Resource Management
+
+CPU limits (--cpus, --cpu-shares)
+Memory limits (--memory)
+Restart policies (no, on-failure, always, unless-stopped)
+Resource constraints / reservations
+
+Lifecycle / States
+
+Created
+Running
+Paused
+Stopped / Exited
+Restarting
+Dead
+
+Security
+
+Image scanning (Docker Scout, Trivy)
+Content trust (DCT) / signed images
+Least-privilege / non-root users
+Read-only filesystems
+Secrets management
+
+Tooling / Ecosystem
+
+Docker Desktop — GUI + local environment
+Docker Scout — image analysis
+Docker Extensions
+Docker Init — scaffold Dockerfiles/Compose
+Compose plugin
+Buildx — extended build (multi-arch)
+Portainer — third-party GUI
+
+That covers architecture, images, Dockerfile syntax, storage, networking, orchestration, isolation internals, lifecycle, security, and tooling. The day-to-day essentials are images, containers, volumes, networks, Dockerfiles, and Compose.

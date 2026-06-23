@@ -1,0 +1,171 @@
+Here's a comprehensive list of scripting concepts a DevOps engineer should know, organized by category.
+Core Programming Fundamentals
+
+Variables & data types (string, int, float, boolean, array/list, dict/map)
+Constants
+Operators (arithmetic, comparison, logical, bitwise, assignment)
+Comments
+Input/output (stdin, stdout, stderr)
+Type casting / conversion
+Scope (global vs local)
+Environment variables
+
+Control Flow
+
+Conditionals (if, elif/else if, else)
+Case / switch statements
+Loops (for, while, until, do-while)
+Loop control (break, continue)
+Ternary / conditional expressions
+Nested conditions/loops
+Short-circuit evaluation (&&, ||)
+
+Functions & Modularity
+
+Function definition / declaration
+Parameters / arguments
+Return values
+Default / optional arguments
+Variadic arguments
+Recursion
+Modules / libraries / imports
+Reusable functions / DRY principle
+
+Data Structures
+
+Arrays / lists
+Associative arrays / dictionaries / maps / hashes
+Sets
+Tuples
+Nested structures
+String manipulation (slicing, concatenation, replace, split, join)
+Regular expressions (regex)
+
+Shell Scripting (Bash/sh) Specifics
+
+Shebang (#!/bin/bash)
+Command substitution ($(...), backticks)
+Variable expansion ($VAR, ${VAR})
+Parameter expansion (${VAR:-default}, ${VAR//find/replace}, ${#VAR})
+Positional parameters ($1, $2, $@, $*, $#)
+Special variables ($?, $$, $!, $0)
+Exit codes / status
+Pipes (|) and redirection (>, >>, <, 2>, &>)
+Here documents (<<EOF) / here strings (<<<)
+Globbing / wildcards (*, ?, [])
+Quoting (single vs double vs no quotes)
+Arithmetic expansion ($((...)))
+Test conditions ([ ], [[ ]], test)
+set options (set -e, set -u, set -o pipefail, set -x)
+Subshells vs current shell
+Functions, local variables
+trap (signal handling / cleanup)
+getopts (argument parsing)
+
+Error Handling
+
+Exit codes / return codes
+try/catch/finally (Python, etc.)
+Exceptions / raising errors
+set -e / set -o pipefail (Bash)
+Defensive programming / input validation
+Graceful degradation
+Logging errors
+Retry logic / backoff
+
+File & I/O Operations
+
+Reading/writing files
+File existence/permission checks
+Line-by-line processing
+Appending vs overwriting
+Temporary files
+File descriptors
+Directory traversal
+Path manipulation
+
+Text Processing (Unix Toolkit)
+
+grep (pattern search)
+sed (stream editing)
+awk (field processing)
+cut, sort, uniq, tr, wc
+head, tail, tee
+xargs
+find
+jq (JSON processing)
+yq (YAML processing)
+Regular expressions
+
+Process & System Interaction
+
+Running external commands
+Background processes (&)
+Job control (jobs, fg, bg)
+Signals (SIGTERM, SIGKILL, SIGINT, SIGHUP)
+Process management (ps, kill, wait)
+Cron jobs / scheduling
+Environment / context
+Exit / cleanup handlers
+
+Scripting Best Practices
+
+Idempotency (safe to re-run)
+Modularity / reusability
+Readability (naming, indentation)
+Comments & documentation
+Logging (levels: debug/info/warn/error)
+Configuration externalization (no hardcoding)
+Dry-run / verbose modes
+Argument parsing / usage messages
+Linting (shellcheck, pylint)
+Version control
+Secrets handling (never hardcode)
+Portability (POSIX compliance)
+
+Common DevOps Scripting Languages
+Bash / Shell
+
+System automation, glue scripts, CI steps
+
+Python
+
+Complex automation, API interaction, data processing
+argparse, subprocess, os, sys, requests, boto3
+Virtual environments, pip
+f-strings, list comprehensions
+
+Others
+
+PowerShell (Windows/cross-platform automation)
+Go (compiled tooling, CLIs)
+Ruby (Chef, legacy tooling)
+Groovy (Jenkins pipelines)
+Perl (legacy text processing)
+Lua, JavaScript/Node (tooling)
+
+Automation-Specific Concepts
+
+Parsing structured data (JSON, YAML, XML, CSV, TOML)
+API calls (REST, curl, HTTP clients)
+Authentication (tokens, keys, OAuth)
+Templating (Jinja2, envsubst, Go templates)
+Configuration files (.env, .ini, .conf)
+Logging frameworks
+Exit-code-driven control in pipelines
+Wrapper scripts around CLIs (kubectl, terraform, aws)
+Polling / waiting for conditions
+Notification integrations (Slack, webhooks)
+
+Advanced Concepts
+
+Concurrency / parallelism (background jobs, GNU parallel, Python threading/asyncio)
+Inter-process communication
+Named pipes (FIFOs)
+Lock files / mutual exclusion (flock)
+State management
+Memoization / caching
+Event-driven scripting
+Daemonization
+
+That spans the language fundamentals, the shell-specific mechanics, the Unix text-processing toolkit, error handling, and the DevOps-flavored automation patterns. For day-to-day work, the highest-leverage skills are solid Bash (with set -euo pipefail, parameter expansion, and trap), the grep/sed/awk/jq toolkit, and Python for anything beyond ~50 lines of glue.

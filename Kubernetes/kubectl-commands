@@ -1,0 +1,91 @@
+Here's a comprehensive list of kubectl commands, organized by category.
+Basic / Getting Info
+
+kubectl get — list resources
+kubectl describe — detailed info about a resource
+kubectl explain — documentation for a resource/field
+kubectl api-resources — list supported resource types
+kubectl api-versions — list supported API versions
+kubectl version — client/server version
+kubectl cluster-info — cluster endpoint info
+kubectl config — manage kubeconfig (view, set-context, use-context, current-context)
+
+Create / Apply
+
+kubectl create — create resource from file/stdin
+kubectl apply — declarative create/update
+kubectl run — create and run a pod
+kubectl expose — create a Service for a resource
+kubectl set — change resource fields (image, resources, env, selector)
+kubectl autoscale — create an HPA
+
+Edit / Update
+
+kubectl edit — edit resource in editor
+kubectl patch — partial update (strategic/JSON merge)
+kubectl replace — replace resource from file
+kubectl scale — change replica count
+kubectl rollout — manage rollouts (status, history, undo, restart, pause, resume)
+kubectl label — add/update/remove labels
+kubectl annotate — add/update/remove annotations
+
+Delete
+
+kubectl delete — delete resources
+
+Debugging / Interaction
+
+kubectl logs — print container logs (-f follow, --previous)
+kubectl exec — run command in a container
+kubectl attach — attach to a running container
+kubectl port-forward — forward local port to a pod/service
+kubectl proxy — proxy to the API server
+kubectl cp — copy files to/from containers
+kubectl debug — create debugging containers/ephemeral containers
+kubectl top — resource usage (nodes, pods) — needs Metrics Server
+kubectl events — list events
+
+Cluster / Node Management
+
+kubectl cordon — mark node unschedulable
+kubectl uncordon — mark node schedulable
+kubectl drain — safely evict pods from a node
+kubectl taint — update node taints
+kubectl certificate — approve/deny CSRs
+
+Auth / RBAC
+
+kubectl auth can-i — check permissions
+kubectl auth reconcile — reconcile RBAC rules
+kubectl create role / create clusterrole
+kubectl create rolebinding / create clusterrolebinding
+kubectl create serviceaccount
+
+Output / Misc
+
+kubectl wait — wait for a condition
+kubectl diff — diff live vs would-be applied config
+kubectl kustomize — build a kustomization
+kubectl apply -k — apply a kustomization
+kubectl completion — shell autocompletion
+kubectl plugin — manage kubectl plugins (krew)
+kubectl options — global flags
+
+Common Useful Flags
+
+-n <namespace> / --all-namespaces (-A)
+-o yaml | json | wide | name | jsonpath=... | custom-columns=...
+-l <label-selector> (label filter)
+--field-selector
+-f <file> (from file)
+--dry-run=client|server
+-w (watch)
+
+kubeadm (cluster lifecycle)
+
+kubeadm init — bootstrap control plane
+kubeadm join — join a node
+kubeadm reset — undo init/join
+kubeadm upgrade — upgrade cluster
+kubeadm token — manage join tokens
+kubeadm certs — manage certificates

@@ -1,0 +1,193 @@
+Here's a comprehensive list of CI/CD components and concepts, covering the full pipeline across tools and stages.
+Core Pipeline Concepts
+Fundamentals
+
+Continuous Integration (CI) — frequent code merges + automated build/test
+Continuous Delivery (CD) — automated release to staging, manual prod approval
+Continuous Deployment (CD) — fully automated to production
+Pipeline — defined sequence of automated stages
+Pipeline as Code — pipeline defined in version-controlled files
+Stages / Jobs / Steps / Tasks
+Workflow / Pipeline definition
+Triggers (push, PR, tag, schedule/cron, manual, webhook, API)
+Runners / Agents / Executors
+Artifacts — build outputs passed between stages
+Caching — speed up dependency installs/builds
+
+Source / Version Control Stage
+
+Git (branches, tags, commits)
+Branching strategies (GitFlow, GitHub Flow, trunk-based)
+Pull/Merge Requests
+Webhooks (trigger pipelines on events)
+Commit hooks / pre-commit hooks
+Monorepo vs polyrepo
+Code owners / branch protection rules
+Signed commits
+
+Build Stage
+
+Build automation (compile, transpile, bundle)
+Build tools (Maven, Gradle, npm, Make, Bazel)
+Dependency management / resolution
+Build matrix (multi-version/platform builds)
+Containerization (Docker build, Buildx, Kaniko, BuildKit)
+Image tagging strategies
+Reproducible builds
+Build caching (layer cache, dependency cache)
+Artifact generation
+
+Test Stage
+
+Unit tests
+Integration tests
+End-to-end (E2E) tests
+Smoke tests
+Regression tests
+Performance / load tests
+Contract tests
+Code coverage (thresholds, reports)
+Test parallelization / sharding
+Test reporting (JUnit XML, etc.)
+Linting / static analysis
+Mocking / test fixtures
+
+Code Quality & Security (Shift-Left)
+
+Static Application Security Testing (SAST)
+Dynamic Application Security Testing (DAST)
+Software Composition Analysis (SCA) — dependency scanning
+Secret scanning (detect leaked credentials)
+Container image scanning (Trivy, Grype, Docker Scout)
+License compliance scanning
+Code quality gates (SonarQube)
+IaC scanning (tfsec, Checkov, Kubesec)
+SBOM (Software Bill of Materials) generation
+Policy as Code (OPA, Conftest)
+
+Artifact Management
+
+Artifact repositories (Artifactory, Nexus, GitHub Packages)
+Container registries (Docker Hub, ECR, GCR, ACR, Harbor)
+Versioning / semantic versioning (SemVer)
+Artifact promotion (dev → staging → prod)
+Artifact signing (Cosign, Notary)
+Immutable artifacts
+Retention policies
+
+Deployment Stage
+Strategies
+
+Rolling deployment
+Blue-green deployment
+Canary deployment
+Recreate / big-bang
+A/B testing
+Shadow / mirror deployment
+Feature flags / toggles
+
+Targets & Tools
+
+Kubernetes (kubectl, Helm, Kustomize)
+Serverless (Lambda, Cloud Functions)
+VMs / bare metal
+Container orchestration
+Infrastructure provisioning (Terraform, Pulumi, CloudFormation)
+Configuration management (Ansible, Chef, Puppet)
+
+GitOps
+
+Argo CD
+Flux CD
+Declarative desired state in Git
+Pull-based vs push-based deployment
+Drift detection & reconciliation
+
+Environments
+
+Dev / Test / Staging / Production
+Ephemeral / preview environments (per-PR)
+Environment parity
+Environment-specific configuration
+Promotion across environments
+Approval gates / manual approvals
+
+Configuration & Secrets
+
+Environment variables
+Secrets management (Vault, AWS Secrets Manager, Sealed Secrets)
+Config files / ConfigMaps
+Parameterization
+Encrypted secrets (SOPS, age)
+Credential injection at runtime
+Secret rotation
+
+Release Management
+
+Release versioning
+Changelogs / release notes (automated)
+Tagging releases
+Release approval workflows
+Rollback mechanisms
+Hotfix process
+Release trains / cadence
+
+Observability & Feedback
+
+Build/deploy notifications (Slack, email, Teams)
+Pipeline metrics (build time, success rate, MTTR)
+DORA metrics (deployment frequency, lead time, change failure rate, MTTR)
+Logging (build logs, deploy logs)
+Monitoring & alerting post-deploy
+Health checks / readiness probes
+Automated rollback on failure
+Distributed tracing
+Status dashboards
+
+Pipeline Infrastructure
+
+Runners / agents (self-hosted vs managed)
+Runner scaling / autoscaling
+Ephemeral runners
+Build farm / runner pools
+Containerized runners
+Concurrency / parallelism limits
+Pipeline orchestration
+Reusable workflows / templates / shared libraries
+
+Major CI/CD Tools (Ecosystem)
+Pipeline Platforms
+
+GitHub Actions
+GitLab CI/CD
+Jenkins
+CircleCI
+Azure DevOps Pipelines
+Travis CI
+Bitbucket Pipelines
+TeamCity
+Drone CI
+Buildkite
+AWS CodePipeline / CodeBuild / CodeDeploy
+Google Cloud Build
+Tekton (Kubernetes-native)
+Argo Workflows
+
+Key Building Blocks (tool-specific terms)
+
+GitHub Actions: workflows, jobs, steps, actions, runners, matrix
+GitLab: stages, jobs, runners, .gitlab-ci.yml
+Jenkins: pipelines, stages, agents, Jenkinsfile, plugins, shared libraries
+Tekton: Tasks, Pipelines, PipelineRuns, TaskRuns
+
+Cross-Cutting Concerns
+
+Idempotency
+Fail-fast vs fail-safe
+Pipeline security (least privilege, OIDC auth, no long-lived secrets)
+Supply chain security (SLSA framework, provenance)
+Cost optimization (cache, parallelism, runner sizing)
+Pipeline testing / dry runs
+Audit logs / compliance
+
+That covers the entire CI/CD lifecycle: source → build → test → security → artifact → deploy → release → observe, plus the supporting infrastructure, environments, secrets, GitOps, and the tool ecosystem. The highest-leverage areas for daily work are pipeline-as-code, build/test automation, deployment strategies, secrets handling, and feedback/observability.

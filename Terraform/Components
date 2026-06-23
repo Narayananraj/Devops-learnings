@@ -1,0 +1,134 @@
+Here's a comprehensive list of Terraform components, organized by category.
+Core Language Blocks (HCL)
+
+terraform — settings block (required_version, required_providers, backend, cloud)
+provider — configure a provider (AWS, Azure, GCP, etc.)
+resource — manage an infrastructure object
+data — data source (read-only lookup)
+variable — input variable
+output — output value
+locals — local values (computed expressions)
+module — call a reusable module
+moved — refactor/track resource address changes
+import (block) — declarative import (1.5+)
+removed — declare removal without destroy (1.7+)
+check — post-apply assertions (1.5+)
+
+State Management
+
+State file (terraform.tfstate)
+Backends (local, s3, azurerm, gcs, consul, http, kubernetes, etc.)
+State locking (DynamoDB, blob lease, etc.)
+Remote state (terraform_remote_state data source)
+Workspaces (state isolation)
+
+Variables & Types
+
+Input variables (variable)
+Variable types: string, number, bool, list, set, map, object, tuple, any
+.tfvars files / -var / -var-file / TF_VAR_ env vars
+sensitive = true
+validation {} blocks
+default values
+Output values (output)
+Local values (locals)
+
+Meta-Arguments
+
+count
+for_each
+depends_on
+provider (resource-level)
+lifecycle (create_before_destroy, prevent_destroy, ignore_changes, replace_triggered_by, precondition, postcondition)
+provisioner (local-exec, remote-exec, file)
+connection (for provisioners)
+
+Modules
+
+Root module
+Child modules
+Module sources (local path, registry, Git, HTTP, S3, GCS)
+Module versioning
+Module inputs/outputs
+Public/Private Terraform Registry
+
+Expressions & Functions
+
+Built-in functions (string, numeric, collection, encoding, filesystem, date/time, hash/crypto, IP network, type conversion)
+Conditional expressions (condition ? true : false)
+for expressions (list/map comprehension)
+Splat expressions ([*])
+Dynamic blocks (dynamic)
+References (var., local., module., data., resource attributes)
+Operators, string templates (${}, %{})
+
+Providers
+
+Provider plugins
+required_providers (source + version)
+Provider configuration / aliases
+Provider authentication
+Terraform Registry (provider distribution)
+
+Provisioning Lifecycle (CLI workflow)
+
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform destroy
+terraform fmt
+
+Other CLI Commands
+
+terraform refresh (deprecated → -refresh-only)
+terraform show
+terraform output
+terraform state (list, show, mv, rm, pull, push, replace-provider)
+terraform import
+terraform taint / untaint (deprecated → -replace)
+terraform workspace (new, select, list, delete, show)
+terraform graph
+terraform console
+terraform login / logout
+terraform providers (lock, schema, mirror)
+terraform force-unlock
+terraform get
+terraform test (1.6+)
+terraform version
+
+Terraform Cloud / Enterprise
+
+cloud block / remote backend
+Workspaces (TFC)
+Runs, Run Triggers
+Sentinel policies (policy-as-code)
+Cost estimation
+Private Module Registry
+Variable sets
+VCS integration
+Agents
+
+Files & Conventions
+
+.tf files (config)
+.tfvars / .tfvars.json
+terraform.tfstate / .tfstate.backup
+.terraform/ directory (plugins, modules)
+.terraform.lock.hcl (dependency lock file)
+override.tf / _override.tf
+.terraformignore
+
+Ecosystem / Tooling
+
+Terragrunt — DRY wrapper / orchestration
+tflint — linter
+tfsec / Checkov / Trivy — security scanning
+terraform-docs — auto-generate docs
+Atlantis — PR-based automation
+Infracost — cost estimation
+OpenTofu — open-source fork
+Terratest — Go-based testing
+pre-commit-terraform — git hooks
+
+That covers the language constructs, state, modules, CLI workflow, TFC/TFE features, file conventions, and the surrounding tooling ecosystem. Core day-to-day work centers on the language blocks, meta-arguments, and the init/plan/apply workflow.

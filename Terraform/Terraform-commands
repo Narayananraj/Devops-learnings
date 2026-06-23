@@ -1,0 +1,80 @@
+5:29 PM
+Here's a comprehensive list of Terraform commands (CLI), organized by category.
+
+Main Workflow
+
+terraform init — initialize working directory (download providers/modules, configure backend)
+terraform validate — check config syntax/consistency
+terraform plan — preview changes
+terraform apply — apply changes
+terraform destroy — destroy managed infrastructure
+terraform fmt — format config files to canonical style
+State Management
+
+terraform state list — list resources in state
+terraform state show — show a resource's attributes
+terraform state mv — move/rename a resource in state
+terraform state rm — remove a resource from state (without destroying)
+terraform state pull — output remote state to stdout
+terraform state push — overwrite remote state from local
+terraform state replace-provider — change provider for resources
+terraform force-unlock — manually release a stuck state lock
+Inspection / Output
+
+terraform show — show state or a saved plan (human/JSON)
+terraform output — read output values
+terraform graph — generate dependency graph (DOT format)
+terraform console — interactive expression evaluation
+terraform providers — show provider requirements
+terraform providers schema — provider schemas (JSON)
+terraform providers lock — update .terraform.lock.hcl
+terraform providers mirror — mirror providers locally
+terraform version — show version + provider versions
+Resource Lifecycle / Targeting
+
+terraform apply -replace=ADDR — replace a resource (modern taint)
+terraform plan/apply -target=ADDR — operate on specific resources
+terraform apply -refresh-only — sync state with real infra (modern refresh)
+terraform taint — mark resource for recreation (deprecated → -replace)
+terraform untaint — remove taint mark (deprecated)
+terraform refresh — update state (deprecated → -refresh-only)
+Import
+
+terraform import ADDR ID — import existing infra into state
+Modules
+
+terraform get — download/update modules
+Workspaces
+
+terraform workspace new — create a workspace
+terraform workspace select — switch workspace
+terraform workspace list — list workspaces
+terraform workspace show — show current workspace
+terraform workspace delete — delete a workspace
+Testing (1.6+)
+
+terraform test — run .tftest.hcl test files
+Terraform Cloud / Enterprise
+
+terraform login — obtain/store API token
+terraform logout — remove stored credentials
+Common Flags
+
+-auto-approve — skip interactive approval (apply/destroy)
+-var 'name=value' / -var-file=file.tfvars — set variables
+-out=planfile — save plan to a file
+-target=ADDR — limit to specific resources
+-replace=ADDR — force replacement
+-refresh-only — only refresh state
+-refresh=false — skip refresh
+-lock=false / -lock-timeout=DURATION — state locking control
+-parallelism=n — concurrent operations (default 10)
+-json — machine-readable output
+-no-color — disable colored output
+-input=false — disable interactive prompts (CI use)
+-compact-warnings — condensed warnings
+-detailed-exitcode — plan exit codes (0=no change, 1=error, 2=changes)
+OpenTofu equivalent
+
+All commands above work as tofu <command> (e.g., tofu init, tofu plan, tofu apply) in the OpenTofu fork.
+That's the full set of built-in Terraform CLI commands plus the most-used flags. Day-to-day work is mostly init → plan → apply, with state, import, and -target/-replace for surgical operations.

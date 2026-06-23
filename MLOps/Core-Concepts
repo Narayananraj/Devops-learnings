@@ -1,0 +1,253 @@
+Here's a comprehensive list of MLOps concepts and tools, organized by category.
+Core MLOps Concepts
+
+MLOps — DevOps principles applied to ML lifecycle
+ML lifecycle (data → train → deploy → monitor → retrain)
+Reproducibility (same data + code = same model)
+Experiment tracking
+Model lineage / provenance
+CI/CD/CT (Continuous Training added to CI/CD)
+ML pipeline automation
+MLOps maturity levels (manual → automated pipelines → full CI/CD/CT)
+Technical debt in ML systems
+Training-serving skew
+
+Data Management
+
+Data versioning
+Data lineage
+Data validation / quality checks
+Data drift
+Feature engineering
+Feature store (centralized feature serving)
+Online vs offline features
+Data labeling / annotation
+Dataset splitting (train/validation/test)
+Data pipelines / ETL/ELT
+Schema validation
+
+Experiment Tracking & Management
+
+Experiment tracking (params, metrics, artifacts)
+Hyperparameters
+Hyperparameter tuning / optimization (grid, random, Bayesian)
+Metrics logging (accuracy, loss, F1, AUC)
+Run comparison
+Experiment reproducibility
+Metadata store
+
+Model Development & Training
+
+Model training / retraining
+Distributed training
+Transfer learning / fine-tuning
+AutoML
+Cross-validation
+Model artifacts (weights, checkpoints)
+Training pipelines
+Continuous Training (CT)
+GPU/TPU resource management
+
+Model Registry & Versioning
+
+Model registry (central model catalog)
+Model versioning
+Model staging (dev → staging → production → archived)
+Model metadata
+Model promotion / approval workflows
+Model packaging (formats below)
+
+Model Packaging & Serialization
+
+Pickle / joblib
+ONNX (interoperable format)
+TensorFlow SavedModel
+TorchScript
+PMML
+Containerization (Docker)
+Model signatures / schemas
+
+Model Deployment & Serving
+Patterns
+
+Batch inference
+Online / real-time inference
+Streaming inference
+Edge deployment
+Serverless inference
+
+Strategies
+
+Shadow deployment
+Canary deployment
+A/B testing (model comparison)
+Blue-green deployment
+Champion/challenger
+Multi-armed bandit
+
+Serving Concepts
+
+Model endpoints / APIs (REST, gRPC)
+Model server
+Batching / dynamic batching
+Model caching
+Autoscaling inference
+Inference latency / throughput
+
+Monitoring (ML-Specific)
+
+Model performance monitoring
+Data drift detection
+Concept drift detection
+Prediction drift
+Feature drift
+Model decay / degradation
+Outlier / anomaly detection
+Data quality monitoring
+Ground truth / feedback loops
+Model explainability / interpretability (SHAP, LIME)
+Bias / fairness monitoring
+Inference logging
+Alerting on metric degradation
+
+Governance & Responsible AI
+
+Model governance
+Audit trails
+Model cards (documentation)
+Datasheets for datasets
+Explainability / interpretability
+Fairness / bias detection
+Reproducibility & compliance (GDPR, etc.)
+Model risk management
+Approval workflows
+Access control
+
+Pipeline Orchestration
+
+ML pipelines (DAGs)
+Pipeline orchestration
+Triggering (scheduled, event-driven, drift-based)
+Pipeline components / steps
+Caching pipeline steps
+Conditional execution
+Parameterized pipelines
+
+Infrastructure
+
+Compute (GPU/TPU/CPU)
+Resource scheduling
+Containerization (Docker)
+Orchestration (Kubernetes)
+Distributed computing
+Scalable storage
+Cost optimization (spot instances, scale-to-zero)
+
+LLMOps (LLM-Specific Subset)
+
+Prompt engineering / management
+Prompt versioning
+RAG (Retrieval-Augmented Generation)
+Vector databases / embeddings
+Fine-tuning / LoRA / PEFT
+Token usage / cost tracking
+LLM evaluation (eval frameworks)
+Hallucination detection
+Guardrails / safety filters
+Context window management
+Inference optimization (quantization, batching)
+
+Tools
+Experiment Tracking
+
+MLflow
+Weights & Biases (W&B)
+Neptune.ai
+Comet ML
+TensorBoard
+ClearML
+
+Data & Feature Management
+
+DVC (Data Version Control)
+Feast (feature store)
+Tecton (feature store)
+LakeFS
+Pachyderm
+Great Expectations (data validation)
+Delta Lake
+
+Pipeline Orchestration
+
+Kubeflow Pipelines
+Apache Airflow
+Prefect
+Dagster
+Metaflow
+ZenML
+Flyte
+Argo Workflows
+
+Model Training / Frameworks
+
+TensorFlow
+PyTorch
+scikit-learn
+XGBoost / LightGBM
+Ray (distributed)
+Hugging Face Transformers
+
+Hyperparameter Tuning
+
+Optuna
+Ray Tune
+Hyperopt
+Katib (Kubeflow)
+
+Model Registry
+
+MLflow Model Registry
+SageMaker Model Registry
+Vertex AI Model Registry
+
+Model Serving / Deployment
+
+KServe (KFServing)
+Seldon Core
+BentoML
+TorchServe
+TensorFlow Serving
+Triton Inference Server (NVIDIA)
+Ray Serve
+
+Monitoring (ML)
+
+Evidently AI
+WhyLabs
+Arize AI
+Fiddler AI
+Prometheus + Grafana (infra-level)
+Alibi Detect (drift/outliers)
+
+End-to-End Platforms
+
+AWS SageMaker
+Google Vertex AI
+Azure ML
+Databricks (MLflow-based)
+Kubeflow
+H2O.ai
+DataRobot
+
+LLMOps Tools
+
+LangChain / LlamaIndex (orchestration)
+LangSmith / LangFuse (observability/tracing)
+Vector DBs: Pinecone, Weaviate, Qdrant, Milvus, Chroma, pgvector
+vLLM / TGI (inference serving)
+Ollama (local LLM serving)
+Guardrails AI / NeMo Guardrails
+Ragas / DeepEval (LLM evaluation)
+PromptLayer (prompt management)
+
+That spans the full ML lifecycle — data versioning, experiment tracking, model registry, deployment, ML-specific monitoring (drift/decay), governance, and the growing LLMOps subset — plus the tool landscape for each stage. The highest-leverage starting stack for most teams is MLflow (tracking + registry) + DVC (data) + an orchestrator (Airflow/Kubeflow) + drift monitoring (Evidently), with KServe/BentoML for serving.

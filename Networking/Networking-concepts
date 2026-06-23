@@ -1,0 +1,217 @@
+Here's a comprehensive list of networking concepts a DevOps engineer should know, organized into the three domains you specified.
+Cloud Networking
+Virtual Networks
+
+VPC (Virtual Private Cloud) / VNet
+Subnets (public, private, isolated)
+CIDR blocks / IP address ranges
+Availability Zones & Regions
+Network segmentation
+
+Routing
+
+Route tables
+Internet Gateway (IGW)
+NAT Gateway / NAT instance
+Egress-only gateways
+Transit Gateway (hub-and-spoke)
+VPC Peering
+Route propagation
+
+Connectivity & Hybrid
+
+VPN (Site-to-Site, Client VPN)
+Direct Connect / ExpressRoute / Cloud Interconnect (dedicated links)
+VPC Endpoints / PrivateLink (private service access)
+Service mesh connectivity
+Multi-region / multi-cloud connectivity
+
+Security (Cloud)
+
+Security Groups (stateful, instance-level)
+Network ACLs (stateless, subnet-level)
+WAF (Web Application Firewall)
+DDoS protection (Shield, Cloud Armor)
+Bastion / jump hosts
+Flow logs (VPC Flow Logs)
+
+Load Balancing & Traffic
+
+Application Load Balancer (L7)
+Network Load Balancer (L4)
+Global / Geo load balancing
+Health checks
+Cross-zone load balancing
+Target groups
+
+DNS & Discovery (Cloud)
+
+Route 53 / Cloud DNS / Azure DNS
+Private hosted zones
+DNS-based service discovery
+Traffic routing policies (weighted, latency, geolocation, failover)
+
+CDN & Edge
+
+CloudFront / Cloud CDN / Azure CDN
+Edge locations / PoPs
+Caching strategies
+Anycast
+
+Server / Infrastructure Networking
+Fundamentals
+
+OSI model (7 layers)
+TCP/IP model (4 layers)
+IPv4 vs IPv6
+MAC addresses
+Public vs private IP addresses
+Static vs dynamic IP (DHCP)
+
+Addressing & Subnetting
+
+Subnetting & supernetting
+CIDR notation
+Subnet masks
+Network/broadcast addresses
+VLSM (Variable Length Subnet Masking)
+Default gateway
+
+Core Protocols
+
+TCP (connection-oriented, reliable)
+UDP (connectionless, fast)
+ICMP (ping, traceroute)
+ARP (IP → MAC resolution)
+DHCP (IP assignment)
+DNS (name resolution)
+
+Ports & Services
+
+Well-known ports (22 SSH, 80 HTTP, 443 HTTPS, 53 DNS, 3306 MySQL, 5432 Postgres, etc.)
+Port forwarding
+Ephemeral ports
+Socket (IP + port)
+
+Routing & Switching
+
+Routers, switches, hubs
+Routing tables (ip route)
+Static vs dynamic routing
+Layer 2 vs Layer 3
+VLANs
+NAT / PAT
+Network bonding / teaming
+
+Firewalls & Security (Server)
+
+iptables / nftables
+firewalld / ufw
+Stateful vs stateless filtering
+Port security
+TLS/SSL, certificates, PKI
+mTLS
+
+Tunneling & VPN
+
+SSH tunneling (local, remote, dynamic)
+WireGuard / OpenVPN / IPsec
+GRE tunnels
+Overlay networks
+
+Diagnostic Tools
+
+ping, traceroute / tracert, mtr
+dig, nslookup, host
+netstat, ss
+tcpdump, wireshark
+curl, wget
+ip (addr, route, link), ifconfig
+nmap (port scanning)
+telnet / nc (netcat) for port checks
+
+Application Networking
+HTTP / Web
+
+HTTP/1.1, HTTP/2, HTTP/3 (QUIC)
+HTTP methods (GET, POST, PUT, DELETE, PATCH…)
+Status codes (2xx, 3xx, 4xx, 5xx)
+Headers, cookies, sessions
+Keep-alive / connection reuse
+HTTPS / TLS handshake
+HSTS
+
+APIs & Communication
+
+REST
+gRPC (HTTP/2-based)
+GraphQL
+WebSockets (bidirectional)
+Webhooks
+Message queues (Kafka, RabbitMQ, SQS) — async networking
+Server-Sent Events (SSE)
+
+Load Balancing & Proxies
+
+Reverse proxy (Nginx, HAProxy, Envoy)
+Forward proxy
+Layer 4 vs Layer 7 load balancing
+Load balancing algorithms (round-robin, least-connections, IP-hash, weighted)
+Sticky sessions / session affinity
+SSL/TLS termination & offloading
+API Gateway
+
+Service Mesh
+
+Sidecar proxy pattern (Envoy)
+Istio / Linkerd / Cilium
+Traffic management (routing, splitting, mirroring)
+Circuit breaking
+Retries & timeouts
+Observability (distributed tracing)
+mTLS between services
+
+Service Discovery
+
+DNS-based discovery
+Service registries (Consul, etcd)
+Client-side vs server-side discovery
+Health checking
+
+Resilience & Traffic Patterns
+
+Rate limiting / throttling
+Circuit breakers
+Retries with backoff
+Timeouts
+Bulkheads
+Canary / blue-green / rolling deployments (traffic shifting)
+Ingress / egress control
+
+Container / K8s Networking
+
+CNI (Container Network Interface)
+Pod-to-pod networking
+ClusterIP / NodePort / LoadBalancer Services
+Ingress controllers
+Network policies
+Overlay networks (VXLAN, Flannel, Calico, Cilium)
+East-west vs north-south traffic
+
+Performance & Optimization
+
+Latency, throughput, bandwidth
+Connection pooling
+Caching (CDN, Redis, application-level)
+Compression (gzip, brotli)
+TCP tuning / congestion control
+MTU & fragmentation
+
+Observability
+
+Distributed tracing (Jaeger, Zipkin, OpenTelemetry)
+Metrics (latency percentiles, error rates, RPS)
+Logging (access logs, error logs)
+APM tools
+
+That spans the cloud control plane, the Linux/server fundamentals underneath, and the application-layer patterns on top. For day-to-day DevOps work, the highest-leverage areas are VPC/subnet/security-group design, the diagnostic tool belt (dig, ss, tcpdump, curl), TLS, load balancing, and Kubernetes/service-mesh networking.

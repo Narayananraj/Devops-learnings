@@ -1,0 +1,127 @@
+Here's an expanded list covering the broader Kubernetes ecosystem tooling and commands beyond core kubectl/kubeadm.
+Helm (package manager)
+
+helm install — install a chart
+helm upgrade — upgrade a release
+helm uninstall — remove a release
+helm rollback — roll back to a previous revision
+helm list / helm ls — list releases
+helm status — release status
+helm repo add/update/list/remove — manage chart repos
+helm search repo/hub — search charts
+helm pull — download a chart
+helm template — render templates locally
+helm lint — validate a chart
+helm create — scaffold a new chart
+helm package — package a chart
+helm history — release revision history
+helm get values/manifest/notes — inspect a release
+helm dependency update/build — manage chart dependencies
+helm show values/chart/readme — inspect a chart
+
+Kustomize
+
+kustomize build — render manifests
+kustomize create — create a kustomization.yaml
+kustomize edit — modify kustomization (add resource, set image, etc.)
+kubectl apply -k / kubectl kustomize — built-in equivalents
+
+minikube (local cluster)
+
+minikube start/stop/delete
+minikube status
+minikube dashboard
+minikube service — expose a service
+minikube addons enable/disable/list
+minikube tunnel — route LoadBalancer services
+minikube ssh
+minikube image load
+
+kind (Kubernetes in Docker)
+
+kind create cluster
+kind delete cluster
+kind get clusters/nodes
+kind load docker-image — load image into cluster
+kind export logs
+
+k3s / k3d (lightweight)
+
+k3s server / k3s agent
+k3s kubectl — bundled kubectl
+k3d cluster create/delete/list
+k3d node create
+k3d image import
+
+crictl (CRI debugging)
+
+crictl ps — list containers
+crictl pods — list pods
+crictl images — list images
+crictl logs — container logs
+crictl exec — exec into container
+crictl inspect — inspect container/pod
+crictl pull — pull image
+
+etcdctl (etcd management)
+
+etcdctl snapshot save/restore — backup/restore
+etcdctl member list/add/remove
+etcdctl get/put/del
+etcdctl endpoint health/status
+
+TUI / Dashboard tools (third-party)
+
+k9s — terminal UI for clusters
+kubectx — switch contexts quickly
+kubens — switch namespaces quickly
+stern — multi-pod log tailing
+kubectl-tree (krew) — show resource ownership tree
+lens — GUI dashboard
+Kubernetes Dashboard — official web UI
+
+GitOps / CD tools
+
+argocd app create/sync/get/list — Argo CD CLI
+flux bootstrap/get/reconcile/install — FluxCD CLI
+
+Security / Policy
+
+kubeseal — Sealed Secrets
+kube-bench — CIS benchmark checks
+kube-hunter — penetration testing
+trivy — image/cluster vulnerability scanning
+falco — runtime security
+opa / conftest — policy evaluation (OPA/Gatekeeper)
+kyverno CLI — policy testing
+
+Networking / Service Mesh
+
+istioctl install/analyze/proxy-status/dashboard — Istio
+linkerd install/check/viz — Linkerd
+cilium install/status/connectivity test — Cilium
+calicoctl — Calico management
+
+Observability
+
+kubectl top (Metrics Server)
+promtool — Prometheus rule/config checking
+kubectl-trace — eBPF tracing
+Prometheus / Grafana / Loki (deployed in-cluster, not CLIs per se)
+
+Scaling / Cost
+
+kubectl-cost (krew) — cost analysis
+KEDA — event-driven autoscaling (CRDs, no main CLI)
+Karpenter — node autoscaling (config-driven)
+
+Misc Utilities
+
+kubeconform / kubeval — manifest validation
+kompose convert — Docker Compose → K8s manifests
+velero backup/restore/schedule — cluster backup/DR
+helmfile — declarative Helm release management
+sops — secrets encryption
+krew — kubectl plugin manager (kubectl krew install/list/search)
+
+This rounds out the practical ecosystem: package management, local clusters, CRI/etcd internals, GitOps, security, service mesh, observability, and backup/DR tooling. Most production setups use some mix of these on top of core kubectl.

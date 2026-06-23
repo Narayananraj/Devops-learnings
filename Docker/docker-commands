@@ -1,67 +1,143 @@
-# 🐳 Docker CLI Commands
+Here's a comprehensive list of Docker CLI commands, organized by category.
+Container Lifecycle
 
-This section covers the essential **Docker Command-Line Interface (CLI) commands** used for managing images, containers, volumes, networks, and more.
+docker run — create and start a container
+docker create — create a container without starting
+docker start — start a stopped container
+docker stop — gracefully stop a container
+docker restart — restart a container
+docker pause — pause processes in a container
+docker unpause — resume paused container
+docker kill — force-stop (send SIGKILL)
+docker rm — remove a container
+docker rename — rename a container
+docker wait — block until container stops (print exit code)
 
----
+Container Interaction / Inspection
 
-## 📌 Docker System Commands
+docker exec — run a command in a running container
+docker attach — attach to a running container
+docker logs — fetch container logs (-f follow)
+docker top — running processes in a container
+docker stats — live resource usage stats
+docker inspect — low-level details (JSON)
+docker diff — changes to container filesystem
+docker port — port mappings
+docker cp — copy files between container and host
+docker export — export container filesystem as tar
+docker update — update container resource limits
 
-```bash
-docker --version               # Show Docker version
-docker info                    # Display system-wide Docker info
-docker help                    # Show available Docker commands 
+Images
 
-📌 Docker Image Commands
+docker build — build an image from a Dockerfile
+docker pull — download an image from a registry
+docker push — upload an image to a registry
+docker images — list images
+docker rmi — remove an image
+docker tag — tag an image
+docker history — show image layers/history
+docker save — save image(s) to a tar archive
+docker load — load image(s) from a tar archive
+docker import — create image from a tarball
+docker commit — create image from a container's changes
+docker inspect — image details (also works on images)
 
-docker images                   # List all images
-docker pull ubuntu               # Download image from Docker Hub
-docker build -t myapp:latest .   # Build an image from a Dockerfile
-docker rmi <image-id>            # Remove an image
-docker image prune               # Remove unused images 
+Registry / Auth
 
-📌 Docker Container Commands
+docker login — authenticate to a registry
+docker logout — log out of a registry
+docker search — search Docker Hub for images
 
-docker ps                        # List running containers
-docker ps -a                     # List all containers (running & stopped)
-docker run hello-world           # Run a test container
-docker run -d -p 8080:80 nginx   # Run Nginx container in detached mode
-docker stop <container-id>       # Stop a container
-docker start <container-id>      # Start a container
-docker restart <container-id>    # Restart a container
-docker rm <container-id>         # Remove a container
-docker logs <container-id>       # View container logs
-docker exec -it <container-id> bash  # Access container shell
+Networking
 
-📌 Docker Volume Commands
+docker network create — create a network
+docker network ls — list networks
+docker network rm — remove a network
+docker network connect — connect container to network
+docker network disconnect — disconnect container
+docker network inspect — network details
+docker network prune — remove unused networks
 
-docker volume create myvolume      # Create a volume
-docker volume ls                   # List volumes
-docker volume inspect myvolume     # View volume details
-docker volume rm myvolume          # Remove a volume
+Volumes
 
-📌 Docker Network Commands
+docker volume create — create a volume
+docker volume ls — list volumes
+docker volume rm — remove a volume
+docker volume inspect — volume details
+docker volume prune — remove unused volumes
 
-docker network ls                  # List networks
-docker network create mynetwork    # Create a custom network
-docker network inspect mynetwork   # Inspect network details
-docker network rm mynetwork        # Remove a network
+System / Cleanup
 
-📌 Docker Compose Commands
+docker system df — disk usage
+docker system prune — remove unused data (containers, networks, images, cache)
+docker system info — system-wide info
+docker system events — real-time events stream
+docker info — display system info
+docker version — Docker version info
+docker ps — list running containers (-a for all)
+docker container prune — remove stopped containers
+docker image prune — remove unused images
 
-docker-compose up -d               # Start services in detached mode
-docker-compose down                # Stop and remove services
-docker-compose logs                # Show service logs
-docker-compose ps                  # List services  
+Management Command Groups (modern syntax)
 
+Docker organizes commands into management groups; many of the above have equivalents:
 
+docker container (run, ls, rm, start, stop, exec, logs, inspect, prune…)
+docker image (build, ls, rm, pull, push, tag, history, prune…)
+docker network (create, ls, rm, connect, inspect, prune…)
+docker volume (create, ls, rm, inspect, prune…)
+docker system (df, prune, info, events…)
+docker context (create, ls, use, rm — manage daemon endpoints)
+docker builder (build, prune — manage builds)
+docker manifest (create, push, inspect — multi-arch manifests)
+docker plugin (install, ls, rm, enable, disable)
+docker trust (sign, inspect — content trust)
 
-📌 Docker System Cleanup
+BuildKit / Buildx
 
-docker system prune                # Remove unused containers, networks, images
-docker container prune             # Remove all stopped containers
-docker volume prune                # Remove all unused volumes 
+docker buildx build — extended build (multi-arch, cache)
+docker buildx create — create a builder instance
+docker buildx ls — list builders
+docker buildx use — switch builder
+docker buildx rm — remove builder
+docker buildx prune — clean build cache
+docker buildx bake — build from a file (HCL/JSON/Compose)
 
+Docker Compose (v2 plugin)
 
-📖 Summary
+docker compose up — create and start services (-d detached)
+docker compose down — stop and remove services
+docker compose build — build service images
+docker compose start/stop/restart — control services
+docker compose ps — list containers
+docker compose logs — view service logs
+docker compose exec — exec into a service
+docker compose run — run a one-off command
+docker compose pull/push — pull/push service images
+docker compose config — validate/view merged config
+docker compose scale — scale a service (or up --scale)
+docker compose pause/unpause
+docker compose top
+docker compose cp
 
-This collection of Docker CLI commands covers daily container, image, volume, and network operations — the foundation of container management with Docker.
+Docker Swarm
+
+docker swarm init — initialize a swarm
+docker swarm join — join a swarm
+docker swarm leave — leave a swarm
+docker swarm join-token — manage join tokens
+docker swarm update — update swarm config
+docker node ls/inspect/rm/update/promote/demote — manage nodes
+docker service create/ls/ps/rm/scale/update/logs/inspect/rollback — manage services
+docker stack deploy/ls/ps/rm/services — manage stacks
+docker secret create/ls/rm/inspect — manage secrets
+docker config create/ls/rm/inspect — manage configs
+
+Other / Misc
+
+docker scout — image vulnerability/analysis (CVEs, recommendations)
+docker init — scaffold Dockerfile/Compose/dockerignore
+docker checkpoint — checkpoint/restore (experimental)
+docker debug — debug containers (Docker Desktop)
+
+That covers container lifecycle, images, networking, volumes, system management, the modern management-group syntax, Buildx, Compose v2, and Swarm. Daily essentials are run, ps, exec, logs, build, images, pull/push, plus compose up/down.
