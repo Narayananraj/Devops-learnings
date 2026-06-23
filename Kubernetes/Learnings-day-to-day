@@ -1,0 +1,38 @@
+# kubectl — Quick Notes 
+
+What is kubectl?
+kubectl = Command-line tool to talk to Kubernetes cluster. Type a command → it sends HTTP request to API Server → cluster acts on it.
+
+# How it works from Laptop
+
+kubectl get pods
+     ↓
+Reads ~/.kube/config        ← cluster address + your credentials
+     ↓
+Sends HTTPS request → API Server → etcd → returns result
+     ↓
+Output shows in Terminal
+
+# kubeconfig-ல 3 things:
+
+cluster — API server address
+user — your certificate / token
+context — which cluster + user + namespace to use
+
+# How it works Inside a Pod (CI/CD)
+
+GitLab / GitHub Actions Pod start ஆகுது
+     ↓
+ServiceAccount token auto-mount ஆகும்
+/var/run/secrets/kubernetes.io/serviceaccount/token
+     ↓
+kubectl automatically reads it → no kubeconfig needed
+     ↓
+API Server → etcd → result
+
+# Cost Tip
+
+Inside Pod-ல SA-க்கு minimum permission மட்டும் கொடு. Overpowered SA → accidental delete → downtime → revenue loss.
+
+bashkubectl auth can-i delete deployments --namespace=production    ## if answer NO means Safe
+
