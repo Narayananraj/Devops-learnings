@@ -1,4 +1,4 @@
-# kubectl — Quick Notes 
+# 1 kubectl — Quick Notes 
 
 What is kubectl?
 kubectl = Command-line tool to talk to Kubernetes cluster. Type a command → it sends HTTP request to API Server → cluster acts on it.
@@ -36,3 +36,259 @@ Inside Pod-ல SA-க்கு minimum permission மட்டும் கொ�
 
 bashkubectl auth can-i delete deployments --namespace=production    ## if answer NO means Safe
 
+================================================================================================================================================
+
+# 2 PODS - Notes 
+
+# Pod என்னன்னு ஒரே line-ல
+
+Pod = Kubernetes-ல ஒரு அல்லது அதிகமான containers ஒரே wrapper-ல இருக்குற unit. இதுதான் Kubernetes deploy பண்ற smallest piece.
+
+Docker-ல நாம் container run பண்றோம். Kubernetes-ல நாம் Pod run பண்றோம் — Pod உள்ளே container இருக்கு.
+
+# Pod-ல என்னென்ன share ஆகுது?
+
+Pod உள்ளே எத்தனை containers இருந்தாலும், மூன்று விஷயம் share ஆகும்:
+Same IP address — இரண்டு containers-உம் ஒரே IP. ஒருத்தன் கிட்ட localhost:9090 சொன்னா, அது same Pod-ல உள்ள இன்னொரு container-அ தொடரும்.
+Same Volume — /var/logs folder-ல main container write பண்றது, sidecar container படிக்கும். Same filesystem share.
+Same lifecycle — Pod delete ஆனா உள்ளே உள்ள எல்லா containers-உம் போகும்.
+
+# Single vs Multi container Pod
+
+Single container — most common. One app, one pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: app
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+
+Multi container — sidecar pattern. Real-time use case: main app log generate பண்ணுது, sidecar அந்த log-ஐ collect பண்ணி cloud-க்கு அனுப்புது.
+
+spec:
+  containers:
+  - name: app
+    image: my-app:v1
+  - name: log-collector       # sidecar
+    image: fluentd:latest
+    volumeMounts:
+    - mountPath: /var/logs
+      name: shared-logs
+
+# Pod Lifecycle — States
+
+Pending → Running → Succeeded / Failed / CrashLoopBackOff
+
+Pending             Node கிடைக்கல, image pull ஆகுது
+Running             கொழந்த live-ஆ இருக்கு
+Succeeded           Job complete ஆச்சு, exit 0
+Failed              Crash ஆச்சு, exit non-zero
+CrashLoopBackOff    திரும்ப திரும்ப crash — check logs!
+
+kubectl get pods                        # status பார்க்க
+kubectl describe pod my-app             # full details + events
+kubectl logs my-app -c app              # specific container logs
+kubectl logs my-app --previous          # crash ஆன pod-ஓட last logs
+
+# Pod எங்க run ஆகுது
+
+Pod ஒரு Worker Node-ல run ஆகும். எந்த Node-ல போகணும்னு Scheduler decide பண்ணும் — CPU, memory available பார்த்து.
+
+kubectl apply -f pod.yaml
+      ↓
+API Server → Scheduler picks Node → kubelet starts container → Pod Running 
+
+# Resource Limits — Cost Cutting ஆயுதம்
+
+இது மிகவும் முக்கியம். Limits வையாம விட்டா Pod unlimited resources எடுக்கும் = cloud bill spike.
+
+resources:
+  requests:
+    memory: "128Mi"    # minimum guarantee
+    cpu: "250m"        # 0.25 core
+  limits:
+    memory: "256Mi"    # இதுக்கு மேல போனா OOMKilled
+    cpu: "500m"        # இதுக்கு மேல throttle ஆகும்
+
+kubectl top pods          # live resource usage பார்க்க
+kubectl top nodes         # node-level usage
+
+# Pod vs Deployment — Key Difference
+
+நேரடியா Pod create பண்ணாதே — Production-ல Deployment use பண்ணு.
+
+                                 Pod                   Depoyment
+
+Pod crash ஆனா            போச்சு, வராது           Auto restart
+Scale பண்ண               Manual                    --replicas=5
+Rolling update              Manual                    Automatic
+Use case                    Testing மட்டும்           Production 
+
+Pod directly — avoid in production
+kubectl run test-pod --image=nginx
+
+Deployment — always prefer
+kubectl create deployment my-app --image=nginx --replicas=3
+
+# Pod Networking — எப்படி Pods ஒருத்தோட ஒருத்தர் பேசுறாங்க
+
+Golden rule: Every Pod can talk to every other Pod — no NAT, direct IP 
+
+Layer 1 — Same Pod உள்ளே (Intra-Pod)
+
+Same Pod-ல இரண்டு containers இருந்தா — localhost பயன்படுத்து. IP-யே வேண்டாம்.
+
+இதுக்கு network call-யே போகாது — memory-ல directly communicate ஆகும். Super fast.
+
+Layer 2 — Same Node, Different Pods
+
+Same Node-ல Pod A (10.0.1.2) → Pod B (10.0.1.3) பேசணும்னா, virtual ethernet bridge (cbr0/cni0) வழியா போகும். 
+
+Pod A eth0 → veth pair → bridge (cbr0) → veth pair → Pod B eth0 
+
+# Pod A-ல இருந்து Pod B-கிட்ட test பண்ண
+kubectl exec -it pod-a -- curl 10.0.1.3:8080
+
+Same Node-ல இருக்குறதால fast, ஆனா Pod IP direct-ஆ use பண்ணாதே — Pod restart ஆனா IP மாறும்!
+
+Layer 3 — Different Nodes (Cross-Node)
+
+Pod A (Node 1) → Pod C (Node 2) பேசணும்னா — இதுக்கு CNI Plugin வேணும்.
+CNI = Container Network Interface. இதுதான் nodes-க்கு இடையில tunnel அல்லது route உருவாக்குது.
+
+CNI Plugin                                      Use case
+
+Flannel                                         Simple, small clusters
+Calico                                          Network policy + large scale
+AWS VPC CNI                                     EKS-ல default — cost efficient
+Ciliume                                         BPF based, high performance 
+
+# EKS-ல CNI பார்க்க
+kubectl get pods -n kube-system | grep aws-node
+
+AWS VPC CNI use பண்ணா Pod-களுக்கு directly VPC IP கிடைக்கும் — extra overlay network இல்ல = latency குறையும் = cost குறையும்.
+
+Layer 4 — Service (Most Important for Production)
+
+Pod IP-ஐ நேரடியா use பண்ணாதே — Pod restart ஆனா IP மாறும். அதுக்கு பதிலா Service use பண்ணு. Service = stable virtual IP + DNS name.
+மூன்று types:
+
+ClusterIP — cluster உள்ளே மட்டும் accessible. Internal communication-க்கு.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+spec:
+  selector:
+    app: backend          # இந்த label உள்ள Pods-க்கு route பண்ணும்
+  ports:
+  - port: 80
+    targetPort: 8080
+  type: ClusterIP         # default
+
+NodePort — Node-ஓட IP + specific port வழியா outside access. Testing-க்கு மட்டும்.
+
+LoadBalancer — Cloud LB create பண்ணும். Production external traffic-க்கு. ஆனா ஒவ்வொரு service-க்கும் தனி LB = cost அதிகம்!
+
+# Cost tip — LoadBalancer-க்கு பதிலா Ingress use பண்ணு
+# ஒரே LB-ல multiple services route பண்ணலாம்
+
+Layer 5 — CoreDNS (Name Resolution)
+
+Service IP-ஐ கூட remember வேண்டாம். DNS name use பண்ணு.
+
+my-svc.default.svc.cluster.local
+  ↑       ↑         ↑
+service  namespace  fixed suffix
+
+# Pod உள்ளே இருந்து
+curl http://backend-svc          # same namespace-ல
+curl http://backend-svc.payments # different namespace
+curl http://backend-svc.payments.svc.cluster.local  # full name
+
+CoreDNS இதை automatically resolve பண்ணும் — Service IP கிடைக்கும் — kube-proxy iptables rules வழியா actual Pod-க்கு route ஆகும்.
+
+# Full Flow — Real Time Example 
+
+Frontend Pod → Backend Service → Backend Pod:
+
+frontend pod (10.0.1.5)
+    ↓  curl http://backend-svc:80
+CoreDNS resolves → 10.96.0.45 (Service ClusterIP)
+    ↓
+kube-proxy iptables rule matches
+    ↓
+routes to one of: backend pod 10.0.2.2 or 10.0.2.3 (load balanced)
+    ↓
+response returns
+
+Cost Cutting — Networking Tips
+
+Tip 1 — LoadBalancer avoid பண்ணு, Ingress use பண்ணு:
+
+yaml# ஒரே ALB-ல multiple services
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: main-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+spec:
+  rules:
+  - host: api.myapp.com
+    http:
+      paths:
+      - path: /users
+        backend:
+          service:
+            name: user-svc
+            port:
+              number: 80
+      - path: /orders
+        backend:
+          service:
+            name: order-svc
+            port:
+              number: 80
+ஒரே LB = one bill. Multiple LB = multiple bills.
+
+Tip 2 — Same Node-ல communicate பண்ண try பண்ணு: 
+
+Cross-node traffic = data transfer cost (AWS-ல AZ charges). topologySpreadConstraints or podAffinity use பண்ணி related pods-ஐ same node-ல வை.
+
+Tip 3 — Network Policy use பண்ணு:
+
+# Only frontend → backend allow, மத்தது block
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: backend-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+          
+Security + accidental traffic குறையும் = cost குறையும்.
+
+
+Layer                             Tool                        Purpose 
+
+Same Pod                          localhost                   Container-to-container
+Same Node                         veth + bridge               Pod-to-Pod 
+Cross Node                        CNI plugin                  Node-to-Node 
+Stable access                     Service                     Pod IP மாறினாலும் OK
+DNS                               CoreDNS                     Name → IP resolve
+External                          Ingress                     One LB, many services
+
+================================================================================================================================================

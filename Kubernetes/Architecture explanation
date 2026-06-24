@@ -1,0 +1,44 @@
+K8s Architecture — Tanglish-ல் புரிஞ்சுக்கோம் 
+
+# Control Plane (Master Node) — "Brain of the Cluster"
+
+நம்ம office-ல manager மாதிரி — யார் என்ன பண்ணணும்னு decide பண்றவன் இவன்.
+
+API Server       --   எல்லா requests-உம் இங்க வரணும். kubectl → API Server → மத்த components. Gatekeeper!
+
+etcd             --   Cluster-ரோட "database". எந்த node-ல என்ன pod இருக்குன்னு எல்லாம் இங்க store ஆகும்.
+
+Scheduler        --   "இந்த pod-ஐ எந்த worker node-ல run பண்ணலாம்?" னு decide பண்றவன்.
+
+Controller Manager    "3 pods இருக்கணும், ஆனா 2 தான் இருக்கு — ஒண்ணு start பண்ணு!" னு constantly watch பண்றவன்.
+
+
+
+# Worker Nodes — "Hands of the Cluster" 
+
+Actual work நடக்கற இடம். Manager சொன்னதை execute பண்றவங்க.
+
+kubelet         --    Worker node-ரோட agent. API Server-கிட்ட heartbeat அனுப்பும், pods start/stop பண்ணும்.
+
+Kube-proxy      --    Network traffic routing. Pod A → Pod B traffic எப்படி போகணும்னு manage பண்றது.
+
+Pods            --    உன்னோட actual application containers run ஆகற இடம்.
+
+Container Runtime     containerd / Docker — container-ஐ actually run பண்ற engine.
+
+
+
+# Real-time Example
+
+kubectl apply -f deployment.yaml
+
+1. kubectl → API Server க்கு request அனுப்பும்
+2. API Server → etcd-ல save பண்ணும்
+3. Scheduler → "Worker Node 2-ல space இருக்கு, அங்க போடு" சொல்லும்
+4. Worker Node 2-ரோட kubelet → pod-ஐ start பண்ணும்
+5. Container Runtime → docker image pull பண்ணி container run பண்ணும்
+
+
+
+
+
