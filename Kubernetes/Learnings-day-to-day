@@ -292,3 +292,213 @@ DNS                               CoreDNS                     Name → IP resolv
 External                          Ingress                     One LB, many services
 
 ================================================================================================================================================
+
+3. ReplicaSet (Notes)
+
+இந்த Pod எப்பவும் ex :3 (replicas) copies running-ஆ இருக்கணும்" — அவ்வளவுதான் ReplicaSet-ஓட வேலை. ஒரு Pod crash ஆனா automatically புதுசா ஒண்ணு start பண்ணும்.
+
+apiVersion: apps/v1
+kind: Deployments
+metadata:
+  name: my-app-deployment
+spec:
+  replicas: 3                    # always 3 pods maintain பண்ணும்
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:latest
+
+Real use case: நேரடியா ReplicaSet use பண்ணாதே — Deployment use பண்ணு. Deployment உள்ளயே ReplicaSet இருக்கு.
+
+======================================================================================================================================================
+
+4. Deployment (Notes)
+
+ReplicaSet + Rolling Update + Rollback — இது மூணும் சேர்ந்தது Deployment. Production-ல most used workload.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1           # update-ஓட time-ல 1 extra pod வரும்
+      maxUnavailable: 0     # zero downtime!
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    spec:
+      containers:
+      - name: app
+        image: my-app:v2    # v1 → v2 rolling update
+
+kubectl rollout status deployment/my-app    # update progress பார்க்க
+kubectl rollout undo deployment/my-app      # v1-க்கு rollback!
+kubectl rollout history deployment/my-app   # history பார்க்க
+
+Cost tip: Replicas count right-size பண்ணு. 10 replicas வேண்டாம்னா 3-க்கு குறை → node count குறையும் → bill குறையும்.
+
+=======================================================================================================================================================
+
+4. StatefulSet (Notes)
+
+Database மாதிரி apps-க்கு. ஒவ்வொரு Pod-க்கும் stable name + stable storage கொடுக்கும். Pod restart ஆனாலும் same data திரும்பி கிடைக்கும்.
+
+Deployment vs StatefulSet:
+
+                          Deployment                        StatefulSet
+
+Pod name                  random (my-app-7f4x2)             ordered (my-app-0, my-app-1)
+Storage                   shared or none                    each pod gets own PVC
+Start order               random                            ordered (0 → 1 → 2)
+Use case                  stateless apps                    databases, queues
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql
+  volumeClaimTemplates:             # ஒவ்வொரு pod-க்கும் தனி volume!
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+
+Real use: MySQL, PostgreSQL, Kafka, Zookeeper, Redis Cluster.
+
+========================================================================================================================================================
+
+5. DaemonSet (Notes)
+
+Cluster-ல உள்ள ஒவ்வொரு Node-லயும் automatically ஒரு Pod run ஆகும். New node join ஆனா அதுலயும் automatically start ஆகும்.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-collector
+spec:
+  selector:
+    matchLabels:
+      app: fluentd
+  template:
+    spec:
+      containers:
+      - name: fluentd
+        image: fluentd:latest
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log      # node-ஓட logs படிக்கும்
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+
+Real use cases:
+
+Log collection (Fluentd, Filebeat)
+Monitoring agent (Datadog, Prometheus node-exporter)
+Network plugin (Calico, Cilium)
+Security agent (Falco)
+
+Cost tip: DaemonSet pods lightweight-ஆ வை — every node-ல run ஆகுறதால, heavy image = all nodes-ல memory waste.
+
+=========================================================================================================================================================
+
+6. Job (Notes)
+
+ஒரு task run பண்ணி, complete ஆனதும் pod terminate ஆகும். Server மாதிரி always-running இல்ல — run to completion.
+
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  completions: 1           # 1 successful completion வேணும்
+  parallelism: 1           # ஒரே நேரத்தில் 1 pod
+  backoffLimit: 3          # fail ஆனா 3 times retry
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: migrate
+        image: my-app:v2
+        command: ["python", "manage.py", "migrate"]
+
+
+kubectl get jobs                    # job status
+kubectl logs job/db-migration       # output பார்க்க
+
+Real use cases: DB migration, data processing, ML training batch, report generation, one-time scripts.
+
+Cost tip: Job complete ஆனதும் pod automatically terminate — idle compute charge இல்ல!
+
+=========================================================================================================================================================
+
+7. CronJob (Notes)
+
+Job-ஐ schedule பண்ணி run பண்றது. Linux cron மாதிரியே — cron syntax use பண்ணும்.
+
+apiVersion: batch/v1
+kind: Cronjob
+metadata:
+  name: daily-report
+  spec:
+    schedule: "0 2 * * *"         # everyday 2 AM
+    concurrencyPolicy: Forbid     # previous job running-ஆ இருந்தா, next job skip பண்ணு
+    SuccessfulJobsHistoryLimit: 3   # last 3 successful jobs retain பண்ணு
+    failedJobsHistoryLimit: 1       # last 1 failed job retain பண்ணு
+    jobTemplate:
+      spec:
+        template:
+          spec:
+            restartPolicy: Onfailure
+            containers:
+            - name: reporter
+              image: my-reporter:latest
+              command: ["python", "generate_report.py"]
+
+
+Cron syntax quick reference:
+
+┌─ minute   (0-59)
+│ ┌─ hour   (0-23)
+│ │ ┌─ day  (1-31)
+│ │ │ ┌─ month (1-12)
+│ │ │ │ ┌─ weekday (0-6, Sun=0)
+│ │ │ │ │
+0 2 * * *   → every day 2AM
+0 */6 * * * → every 6 hours
+0 9 * * 1   → every Monday 9AM
+
+Real use cases: Daily reports, hourly data sync, weekly cleanup, DB backup, cache warm-up.
+Cost tip: CronJob-க்கு ttlSecondsAfterFinished: 300 set பண்ணு — completed job pods auto-delete ஆகும், etcd clean-ஆ இருக்கும்.
+
+=========================================================================================================================================================
+
+
+
